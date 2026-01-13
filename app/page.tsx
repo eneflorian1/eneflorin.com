@@ -1,3 +1,5 @@
+"use client";
+
 const stats = [
   { label: 'Taskuri active', value: '12' },
   { label: 'Taskuri finalizate', value: '38' },
