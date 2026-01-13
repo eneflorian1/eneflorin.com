@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
-          server-dir: ./
+          server-dir: ./public_html/
           
           # DANGER: Set 'true' to DELETE existing files (like Hostico's default index.php)
           # ONLY use this if you don't keep other files (images/emails) in public_html
