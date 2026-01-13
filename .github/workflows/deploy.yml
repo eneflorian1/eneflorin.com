@@ -33,6 +33,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
           server-dir: ./public_html/
-          # DANGER: 'true' will delete files on the server that are not in the build
-          # Set to 'false' if you share this folder with other files (like images/uploads)
-          dangerous-clean-slate: false 
+          
+          # DANGER: Set 'true' to DELETE existing files (like Hostico's default index.php)
+          # ONLY use this if you don't keep other files (images/emails) in public_html
+          dangerous-clean-slate: true 
