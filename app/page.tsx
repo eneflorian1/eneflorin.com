@@ -1,66 +1,68 @@
 "use client";
 
+import { useEffect, useState } from 'react';
+
 const stats = [
-  { label: 'Taskuri active', value: '12' },
-  { label: 'Taskuri finalizate', value: '38' },
-  { label: 'Proiecte live', value: '5' },
-  { label: 'Articole publicate', value: '14' },
+  { label: 'Taskuri active', value: '14' },
+  { label: 'Taskuri finalizate', value: '27' },
+  { label: 'Proiecte live', value: '3' },
+  { label: 'Aplicații în lucru', value: '2' },
 ];
 
 const tasks = [
   {
-    title: 'Landing page pentru clientul Nordica',
-    status: 'In progress',
-    due: '12 Oct',
-    tags: ['UI', 'Branding'],
+    title: 'LLM imobiliare pentru de-vanzare.ro',
+    status: 'În lucru',
+    due: '25 Mar',
+    tags: ['AI', 'Imobiliare'],
   },
   {
-    title: 'Audit accesibilitate pentru portofoliu',
-    status: 'Review',
-    due: '15 Oct',
-    tags: ['UX', 'Accessibility'],
+    title: 'API voice pentru dictare anunțuri',
+    status: 'De pornit',
+    due: '27 Mar',
+    tags: ['API', 'Voice'],
   },
   {
-    title: 'Wireframe admin pentru taskuri personale',
-    status: 'Ready',
-    due: '18 Oct',
-    tags: ['Admin', 'Productivity'],
+    title: 'UI/UX mobile: elimină textul inutil și evidențiază esențialul',
+    status: 'De pornit',
+    due: '28 Mar',
+    tags: ['UI/UX', 'Mobile'],
   },
 ];
 
 const posts = [
   {
-    title: 'Cum organizez sprinturile personale',
-    description: 'Structura săptămânală, ritualuri și tool-uri care mă țin pe drumul cel bun.',
-    date: '6 Oct 2024',
+    title: 'Plan de lucru pentru de-vanzare.ro',
+    description: 'Structurarea taskurilor mari în livrabile clare pentru web, mobil și automatizări.',
+    date: '12 Mar 2025',
   },
   {
-    title: 'Checklist pentru lansarea unui produs',
-    description: 'De la copy și UX până la tracking și analytics, pas cu pas.',
-    date: '28 Sep 2024',
+    title: 'Hardening backend: priorități',
+    description: 'MultiversX login, resetare parolă sigură și control acces pentru /api/transcribe.',
+    date: '10 Mar 2025',
   },
   {
-    title: 'Design tokens pentru proiecte scalabile',
-    description: 'De ce păstrez culorile și spațierile în sistem, nu în fișiere disparate.',
-    date: '19 Sep 2024',
+    title: 'Automatizări TikTok & notificări',
+    description: 'Scheduler cloud, scraping zilnic și sistem complex de notificări push/mobile.',
+    date: '7 Mar 2025',
   },
 ];
 
 const projects = [
   {
-    title: 'Solaria Dashboard',
-    role: 'Product design + Front-end',
-    summary: 'Interfață pentru monitorizarea energiei verzi, cu rapoarte live și alerting.',
+    title: 'de-vanzare.ro',
+    role: 'Platformă web marketplace',
+    summary: 'Publicare anunțuri, promovări plătite din balanță și management utilizatori.',
   },
   {
-    title: 'Atlas CRM',
-    role: 'UX strategy',
-    summary: 'Refactor complet al pipeline-ului de vânzări, cu onboarding și status logic.',
+    title: 'Aplicație mobilă de-vanzare.ro',
+    role: 'iOS + Android',
+    summary: 'Notificări push, mesagerie și upload rapid de anunțuri din mobil.',
   },
   {
-    title: 'Pulse Studio',
-    role: 'Brand + Web',
-    summary: 'Identitate vizuală și website pentru un studio de arhitectură contemporan.',
+    title: 'Automatizări TikTok',
+    role: 'Scheduler & conținut',
+    summary: 'Pornire automată, setări autonome și publicare zilnică din cloud.',
   },
 ];
 
@@ -71,23 +73,94 @@ const quickLinks = [
 ];
 
 const weeklyFocus = [
-  'Revizuire obiective și backlog',
-  'Sprint design + prototip',
-  'Scris pentru blog',
-  'Demo & retrospective',
+  'Definește scope-ul LLM imobiliare',
+  'Rezolvă linkurile de categorii OLX',
+  'Prototip pentru API voice și flux dictare',
+  'Planifică modul de notificări push/mobile',
 ];
 
+const roadmapItems = [
+  'Umplut site cu date reale și conținut complet',
+  'Rezolvare UI-backend (aliniere UX, performanță, erori)',
+  'Pornit auto TikTok pentru promovare',
+  'Setări autonome TikTok scheduler (cloud scrape 1x/zi)',
+  'Manage utilizatori, roluri și permisiuni',
+  'Dark mode + avataruri AI',
+  'Blockchain pentru promovare și balanță',
+  'Aplicație Android',
+];
+
+type Todo = {
+  id: string;
+  title: string;
+  done: boolean;
+};
+
 export default function Home() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todoInput, setTodoInput] = useState('');
+  const [isLoadingTodos, setIsLoadingTodos] = useState(false);
+
+  const loadTodos = async () => {
+    setIsLoadingTodos(true);
+    try {
+      const response = await fetch('/api/todos');
+      if (!response.ok) return;
+      const data = (await response.json()) as { todos: Todo[] };
+      setTodos(data.todos);
+    } finally {
+      setIsLoadingTodos(false);
+    }
+  };
+
+  useEffect(() => {
+    void loadTodos();
+  }, []);
+
+  const handleAddTodo = async () => {
+    const trimmed = todoInput.trim();
+    if (!trimmed) return;
+    const response = await fetch('/api/todos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: trimmed }),
+    });
+    if (!response.ok) return;
+    const data = (await response.json()) as { todo: Todo };
+    setTodos((current) => [data.todo, ...current]);
+    setTodoInput('');
+  };
+
+  const handleToggleTodo = async (id: string) => {
+    const response = await fetch('/api/todos', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    if (!response.ok) return;
+    const data = (await response.json()) as { todo: Todo };
+    setTodos((current) => current.map((todo) => (todo.id === id ? data.todo : todo)));
+  };
+
+  const handleDeleteTodo = async (id: string) => {
+    const response = await fetch('/api/todos', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    if (!response.ok) return;
+    setTodos((current) => current.filter((todo) => todo.id !== id));
+  };
+
   return (
     <main className="page">
       <header className="hero">
         <div className="heroContent">
           <div>
-            <p className="pill">Admin personal • Blog • Portofoliu</p>
-            <h1>Salut! Aici îmi gestionez taskurile și îmi public proiectele.</h1>
+            <p className="pill">de-vanzare.ro • priorități mobile</p>
+            <h1>Priorități reale pentru produs și echipă.</h1>
             <p className="subtitle">
-              Un hub unic pentru planificare, scris și prezentarea muncii mele. Totul este construit să fie
-              clar, responsive și ușor de navigat.
+              UI/UX pe mobil, LLM imobiliare și API voice. Totul pus în prim plan.
             </p>
           </div>
           <div className="heroActions">
@@ -103,23 +176,23 @@ export default function Home() {
         <div className="heroCard">
           <div>
             <h2>Focus astăzi</h2>
-            <p>Finalizează wireframe-ul pentru dashboardul de taskuri și pregătește brief-ul pentru blog.</p>
+            <p>Optimizează UI/UX mobile și accelerează LLM imobiliare.</p>
           </div>
           <div className="progress">
             <span />
           </div>
           <div className="progressMeta">
-            <span>4/7 taskuri</span>
-            <span>58%</span>
+            <span>5/12 taskuri</span>
+            <span>42%</span>
           </div>
           <div className="heroMeta">
             <div>
               <p>Deadline</p>
-              <strong>12 Oct</strong>
+              <strong>29 Mar</strong>
             </div>
             <div>
               <p>Focus</p>
-              <strong>Productivity</strong>
+              <strong>UI/UX mobile</strong>
             </div>
           </div>
         </div>
@@ -168,7 +241,7 @@ export default function Home() {
             <div className="panelHeader">
               <div>
                 <h2>Blog</h2>
-                <p>Ultimele articole publicate</p>
+                <p>Note interne și update-uri</p>
               </div>
               <button className="ghost">Arhivă</button>
             </div>
@@ -207,14 +280,73 @@ export default function Home() {
               ))}
             </div>
           </div>
+          <div className="panel">
+            <div className="panelHeader">
+              <div>
+                <h2>Backlog principal</h2>
+                <p>Livrabilele pe care le adaugăm imediat</p>
+              </div>
+            </div>
+            <div className="roadmapList">
+              {roadmapItems.map((item) => (
+                <div key={item} className="roadmapItem">
+                  <span className="dot" />
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <aside className="sidebar">
+          <div className="panel">
+            <div className="panelHeader">
+              <div>
+                <h2>Todo manager</h2>
+                <p>Creare și gestionare taskuri</p>
+              </div>
+              <button className="ghost" onClick={loadTodos}>
+                Reîncarcă
+              </button>
+            </div>
+            <div className="todoInput">
+              <input
+                value={todoInput}
+                onChange={(event) => setTodoInput(event.target.value)}
+                placeholder="Adaugă un task nou"
+                aria-label="Task nou"
+              />
+              <button className="primary" onClick={handleAddTodo}>
+                Adaugă
+              </button>
+            </div>
+            {isLoadingTodos ? (
+              <p className="muted">Se încarcă taskurile...</p>
+            ) : (
+              <div className="todoList">
+                {todos.length === 0 ? (
+                  <p className="muted">Nu există taskuri încă.</p>
+                ) : (
+                  todos.map((todo) => (
+                    <div key={todo.id} className={`todoItem ${todo.done ? 'done' : ''}`}>
+                      <button className="ghost" onClick={() => handleToggleTodo(todo.id)}>
+                        {todo.done ? 'Reia' : 'Finalizat'}
+                      </button>
+                      <p>{todo.title}</p>
+                      <button className="ghost" onClick={() => handleDeleteTodo(todo.id)}>
+                        Șterge
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
           <div className="panel profile">
             <div>
               <p className="meta">Administrator</p>
               <h2>Ene Florin</h2>
-              <p className="muted">Product designer & front-end builder</p>
+              <p className="muted">Manager de produs & dezvoltator front-end</p>
             </div>
             <div className="profileStats">
               <div>
@@ -237,7 +369,7 @@ export default function Home() {
             <div className="panelHeader">
               <div>
                 <h2>Agenda săptămânii</h2>
-                <p>Obiceiuri și livrabile</p>
+                <p>Obiective și livrabile</p>
               </div>
               <button className="ghost">Planifică</button>
             </div>
@@ -252,9 +384,9 @@ export default function Home() {
           </div>
 
           <div className="panel callout">
-            <h3>Newsletter creativ</h3>
-            <p>Trimite un update lunar despre proiecte, proces și lecții învățate.</p>
-            <button className="secondary">Creează draft</button>
+            <h3>Raport lunar de progres</h3>
+            <p>Trimite un update despre livrări, buguri și decizii tehnice importante.</p>
+            <button className="secondary">Creează raport</button>
           </div>
         </aside>
       </section>
@@ -406,7 +538,7 @@ export default function Home() {
 
         .progress span {
           display: block;
-          width: 58%;
+          width: 42%;
           height: 100%;
           background: #1d1b19;
         }
@@ -677,6 +809,65 @@ export default function Home() {
           background: linear-gradient(135deg, #fff2d6, #f1e7ff);
         }
 
+        .roadmapList {
+          display: flex;
+          flex-direction: column;
+          gap: 0.8rem;
+        }
+
+        .roadmapItem {
+          display: flex;
+          gap: 0.8rem;
+          align-items: flex-start;
+          padding-bottom: 0.8rem;
+          border-bottom: 1px solid #f0e6db;
+        }
+
+        .roadmapItem:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+
+        .todoInput {
+          display: flex;
+          gap: 0.6rem;
+        }
+
+        .todoInput input {
+          flex: 1;
+          border-radius: 12px;
+          border: 1px solid #efe3d7;
+          padding: 0.65rem 0.75rem;
+          font-size: 0.9rem;
+        }
+
+        .todoList {
+          display: flex;
+          flex-direction: column;
+          gap: 0.6rem;
+        }
+
+        .todoItem {
+          display: grid;
+          grid-template-columns: auto 1fr auto;
+          gap: 0.6rem;
+          align-items: center;
+          padding: 0.7rem;
+          background: #faf7f4;
+          border-radius: 12px;
+          border: 1px solid #efe3d7;
+        }
+
+        .todoItem p {
+          margin: 0;
+          font-size: 0.9rem;
+        }
+
+        .todoItem.done p {
+          text-decoration: line-through;
+          color: #7a6f67;
+        }
+
         @media (max-width: 980px) {
           .content {
             grid-template-columns: 1fr;
@@ -694,6 +885,15 @@ export default function Home() {
 
           .hero {
             padding: 2rem;
+          }
+
+          .pill,
+          .subtitle {
+            display: none;
+          }
+
+          h1 {
+            font-size: 1.8rem;
           }
 
           .task {
@@ -718,6 +918,15 @@ export default function Home() {
 
           .heroActions {
             grid-template-columns: 1fr;
+          }
+
+          .todoInput {
+            flex-direction: column;
+          }
+
+          .todoItem {
+            grid-template-columns: 1fr;
+            text-align: left;
           }
         }
 
