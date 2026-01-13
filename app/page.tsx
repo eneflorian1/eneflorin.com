@@ -6,7 +6,7 @@ export default function Home() {
         Acest site a fost deployat automat pe Hostico folosind <strong>GitHub Actions</strong>.
       </p>
       <div style={{ marginTop: '2rem', padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-        <h2>Instrucțiuni</h2>
+        <h2>Instrucțiunzzzzzzzzzzzzzzzzzi</h2>
         <p>Orice modificare (push) pe branch-ul <code>main</code> va declanșa un nou deploy.</p>
       </div>
     </main>
