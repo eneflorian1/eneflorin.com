@@ -1,66 +1,66 @@
 "use client";
 
 const stats = [
-  { label: 'Taskuri active', value: '12' },
-  { label: 'Taskuri finalizate', value: '38' },
-  { label: 'Proiecte live', value: '5' },
-  { label: 'Articole publicate', value: '14' },
+  { label: 'Taskuri active', value: '14' },
+  { label: 'Taskuri finalizate', value: '27' },
+  { label: 'Proiecte live', value: '3' },
+  { label: 'Aplicații în lucru', value: '2' },
 ];
 
 const tasks = [
   {
-    title: 'Landing page pentru clientul Nordica',
-    status: 'In progress',
-    due: '12 Oct',
-    tags: ['UI', 'Branding'],
+    title: 'LLM imobiliare pentru de-vanzare.ro (task principal)',
+    status: 'În lucru',
+    due: '25 Mar',
+    tags: ['AI', 'Imobiliare'],
   },
   {
-    title: 'Audit accesibilitate pentru portofoliu',
-    status: 'Review',
-    due: '15 Oct',
-    tags: ['UX', 'Accessibility'],
+    title: 'API voice pentru dictare anunțuri (task secundar)',
+    status: 'De pornit',
+    due: '27 Mar',
+    tags: ['API', 'Voice'],
   },
   {
-    title: 'Wireframe admin pentru taskuri personale',
-    status: 'Ready',
-    due: '18 Oct',
-    tags: ['Admin', 'Productivity'],
+    title: 'Hardening /api/transcribe (autentificare, limită fișier, prompt)',
+    status: 'În analiză',
+    due: '28 Mar',
+    tags: ['API', 'Securitate'],
   },
 ];
 
 const posts = [
   {
-    title: 'Cum organizez sprinturile personale',
-    description: 'Structura săptămânală, ritualuri și tool-uri care mă țin pe drumul cel bun.',
-    date: '6 Oct 2024',
+    title: 'Plan de lucru pentru de-vanzare.ro',
+    description: 'Structurarea taskurilor mari în livrabile clare pentru web, mobil și automatizări.',
+    date: '12 Mar 2025',
   },
   {
-    title: 'Checklist pentru lansarea unui produs',
-    description: 'De la copy și UX până la tracking și analytics, pas cu pas.',
-    date: '28 Sep 2024',
+    title: 'Hardening backend: priorități',
+    description: 'MultiversX login, resetare parolă sigură și control acces pentru /api/transcribe.',
+    date: '10 Mar 2025',
   },
   {
-    title: 'Design tokens pentru proiecte scalabile',
-    description: 'De ce păstrez culorile și spațierile în sistem, nu în fișiere disparate.',
-    date: '19 Sep 2024',
+    title: 'Automatizări TikTok & notificări',
+    description: 'Scheduler cloud, scraping zilnic și sistem complex de notificări push/mobile.',
+    date: '7 Mar 2025',
   },
 ];
 
 const projects = [
   {
-    title: 'Solaria Dashboard',
-    role: 'Product design + Front-end',
-    summary: 'Interfață pentru monitorizarea energiei verzi, cu rapoarte live și alerting.',
+    title: 'de-vanzare.ro',
+    role: 'Platformă web marketplace',
+    summary: 'Publicare anunțuri, promovări plătite din balanță și management utilizatori.',
   },
   {
-    title: 'Atlas CRM',
-    role: 'UX strategy',
-    summary: 'Refactor complet al pipeline-ului de vânzări, cu onboarding și status logic.',
+    title: 'Aplicație mobilă de-vanzare.ro',
+    role: 'iOS + Android',
+    summary: 'Notificări push, mesagerie și upload rapid de anunțuri din mobil.',
   },
   {
-    title: 'Pulse Studio',
-    role: 'Brand + Web',
-    summary: 'Identitate vizuală și website pentru un studio de arhitectură contemporan.',
+    title: 'Automatizări TikTok',
+    role: 'Scheduler & conținut',
+    summary: 'Pornire automată, setări autonome și publicare zilnică din cloud.',
   },
 ];
 
@@ -71,10 +71,10 @@ const quickLinks = [
 ];
 
 const weeklyFocus = [
-  'Revizuire obiective și backlog',
-  'Sprint design + prototip',
-  'Scris pentru blog',
-  'Demo & retrospective',
+  'Definește scope-ul LLM imobiliare',
+  'Rezolvă linkurile de categorii OLX',
+  'Prototip pentru API voice și flux dictare',
+  'Planifică modul de notificări push/mobile',
 ];
 
 export default function Home() {
@@ -83,11 +83,11 @@ export default function Home() {
       <header className="hero">
         <div className="heroContent">
           <div>
-            <p className="pill">Admin personal • Blog • Portofoliu</p>
-            <h1>Salut! Aici îmi gestionez taskurile și îmi public proiectele.</h1>
+            <p className="pill">Admin proiect • Roadmap • de-vanzare.ro</p>
+            <h1>Salut! Aici îmi organizez taskurile pentru platforma de-vanzare.ro.</h1>
             <p className="subtitle">
-              Un hub unic pentru planificare, scris și prezentarea muncii mele. Totul este construit să fie
-              clar, responsive și ușor de navigat.
+              Un hub unic pentru planificare, backlog și monitorizarea progresului. Conținutul este orientat
+              către livrabile reale pentru web, mobil și automatizări.
             </p>
           </div>
           <div className="heroActions">
@@ -103,23 +103,23 @@ export default function Home() {
         <div className="heroCard">
           <div>
             <h2>Focus astăzi</h2>
-            <p>Finalizează wireframe-ul pentru dashboardul de taskuri și pregătește brief-ul pentru blog.</p>
+            <p>Prioritizează livrarea LLM imobiliare și setup-ul API voice.</p>
           </div>
           <div className="progress">
             <span />
           </div>
           <div className="progressMeta">
-            <span>4/7 taskuri</span>
-            <span>58%</span>
+            <span>5/12 taskuri</span>
+            <span>42%</span>
           </div>
           <div className="heroMeta">
             <div>
               <p>Deadline</p>
-              <strong>12 Oct</strong>
+              <strong>29 Mar</strong>
             </div>
             <div>
               <p>Focus</p>
-              <strong>Productivity</strong>
+              <strong>LLM imobiliare</strong>
             </div>
           </div>
         </div>
@@ -168,7 +168,7 @@ export default function Home() {
             <div className="panelHeader">
               <div>
                 <h2>Blog</h2>
-                <p>Ultimele articole publicate</p>
+                <p>Note interne și update-uri</p>
               </div>
               <button className="ghost">Arhivă</button>
             </div>
@@ -214,7 +214,7 @@ export default function Home() {
             <div>
               <p className="meta">Administrator</p>
               <h2>Ene Florin</h2>
-              <p className="muted">Product designer & front-end builder</p>
+              <p className="muted">Manager de produs & dezvoltator front-end</p>
             </div>
             <div className="profileStats">
               <div>
@@ -237,7 +237,7 @@ export default function Home() {
             <div className="panelHeader">
               <div>
                 <h2>Agenda săptămânii</h2>
-                <p>Obiceiuri și livrabile</p>
+                <p>Obiective și livrabile</p>
               </div>
               <button className="ghost">Planifică</button>
             </div>
@@ -252,9 +252,9 @@ export default function Home() {
           </div>
 
           <div className="panel callout">
-            <h3>Newsletter creativ</h3>
-            <p>Trimite un update lunar despre proiecte, proces și lecții învățate.</p>
-            <button className="secondary">Creează draft</button>
+            <h3>Raport lunar de progres</h3>
+            <p>Trimite un update despre livrări, buguri și decizii tehnice importante.</p>
+            <button className="secondary">Creează raport</button>
           </div>
         </aside>
       </section>
@@ -406,7 +406,7 @@ export default function Home() {
 
         .progress span {
           display: block;
-          width: 58%;
+          width: 42%;
           height: 100%;
           background: #1d1b19;
         }
