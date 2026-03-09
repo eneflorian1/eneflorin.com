@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Header } from "../components/Header";
 import {
     IconHome,
     IconBook,
@@ -144,24 +145,7 @@ export default function TutorialsIndex() {
     return (
         <>
             {/* Fixed Header */}
-            <header className="site-header">
-                <div className="site-header__inner">
-                    <a href="/" className="site-header__logo" id="header-logo">
-                        <IconBookOpen size={22} /> EneFlorin
-                    </a>
-                    <nav className="site-header__nav">
-                        <a href="/" className="site-header__nav-link" id="desktop-nav-home">
-                            Acasă
-                        </a>
-                        <a href="/tutorials" className="site-header__nav-link site-header__nav-link--active" id="desktop-nav-tutorials">
-                            Tutoriale
-                        </a>
-                        <a href="#" className="site-header__nav-link" id="desktop-nav-about">
-                            Despre
-                        </a>
-                    </nav>
-                </div>
-            </header>
+            <Header />
 
             <main className="page-content">
                 {/* Page Header */}
