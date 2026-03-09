@@ -431,18 +431,18 @@ export default function BlockchainTutorial() {
             {/* Fixed Bottom Nav */}
             <nav className="nav-bottom">
                 <div className="nav-bottom__inner">
-                    <a href="/" className="nav-bottom__item" id="nav-home">
+                    <Link href="/" className="nav-bottom__item" id="nav-home">
                         <span className="nav-bottom__icon"><IconHome size={22} /></span>
                         <span>Acasă</span>
-                    </a>
-                    <a href="/tutorials" className="nav-bottom__item nav-bottom__item--active" id="nav-tutorials">
+                    </Link>
+                    <Link href="/tutorials" className="nav-bottom__item nav-bottom__item--active" id="nav-tutorials">
                         <span className="nav-bottom__icon"><IconBook size={22} /></span>
                         <span>Tutoriale</span>
-                    </a>
-                    <a href="#" className="nav-bottom__item" id="nav-about">
+                    </Link>
+                    <Link href="/despre" className="nav-bottom__item" id="nav-about">
                         <span className="nav-bottom__icon"><IconUser size={22} /></span>
                         <span>Despre</span>
-                    </a>
+                    </Link>
                 </div>
             </nav>
         </>

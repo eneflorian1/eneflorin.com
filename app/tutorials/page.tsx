@@ -69,8 +69,15 @@ const categories = [
         color: "#ec4899",
         bgColor: "rgba(236, 72, 153, 0.06)",
         borderColor: "rgba(236, 72, 153, 0.12)",
-        tutorials: [],
-        comingSoon: true,
+        tutorials: [
+            {
+                slug: "ugc",
+                title: "UGC - User Generated Content",
+                description: "Descoperă cum să creezi, să monetizezi și să distribui conținut generat de utilizatori.",
+                badges: ["new"],
+            },
+        ],
+        comingSoon: false,
     },
     {
         id: "web4",
@@ -100,8 +107,15 @@ const categories = [
         color: "#06b6d4",
         bgColor: "rgba(6, 182, 212, 0.06)",
         borderColor: "rgba(6, 182, 212, 0.12)",
-        tutorials: [],
-        comingSoon: true,
+        tutorials: [
+            {
+                slug: "agenti-ai",
+                title: "Agenți AI - Construiește Asistenți Inteligenți",
+                description: "Învață să creezi agenți AI autonomi care pot automatiza taskuri complexe.",
+                badges: ["new"],
+            },
+        ],
+        comingSoon: false,
     },
     {
         id: "trading",
@@ -112,8 +126,15 @@ const categories = [
         color: "#10b981",
         bgColor: "rgba(16, 185, 129, 0.06)",
         borderColor: "rgba(16, 185, 129, 0.12)",
-        tutorials: [],
-        comingSoon: true,
+        tutorials: [
+            {
+                slug: "trading-crypto",
+                title: "Trading Crypto - Strategii & Analiză",
+                description: "Stăpânește arta tradingului de criptomonede prin strategii dovedite.",
+                badges: ["new"],
+            },
+        ],
+        comingSoon: false,
     },
     {
         id: "robots",
@@ -124,8 +145,15 @@ const categories = [
         color: "#f59e0b",
         bgColor: "rgba(245, 158, 11, 0.06)",
         borderColor: "rgba(245, 158, 11, 0.12)",
-        tutorials: [],
-        comingSoon: true,
+        tutorials: [
+            {
+                slug: "roboti-umanoizi",
+                title: "Roboți Umanoizi - Robotică & Automatizare",
+                description: "Explorează fascinanta lume a roboticii umanoide - de la mecanică la AI.",
+                badges: ["new"],
+            },
+        ],
+        comingSoon: false,
     },
     {
         id: "cad",
@@ -136,8 +164,15 @@ const categories = [
         color: "#8b5cf6",
         bgColor: "rgba(139, 92, 246, 0.06)",
         borderColor: "rgba(139, 92, 246, 0.12)",
-        tutorials: [],
-        comingSoon: true,
+        tutorials: [
+            {
+                slug: "proiectare-cad",
+                title: "Proiectare CAD - Design & Modelare 3D",
+                description: "Învață să creezi modele 3D profesionale pentru design industrial.",
+                badges: ["new"],
+            },
+        ],
+        comingSoon: false,
     },
 ];
 
@@ -231,18 +266,18 @@ export default function TutorialsIndex() {
             {/* Fixed Bottom Nav */}
             <nav className="nav-bottom">
                 <div className="nav-bottom__inner">
-                    <a href="/" className="nav-bottom__item" id="nav-home">
+                    <Link href="/" className="nav-bottom__item" id="nav-home">
                         <span className="nav-bottom__icon"><IconHome size={22} /></span>
                         <span>Acasă</span>
-                    </a>
-                    <a href="/tutorials" className="nav-bottom__item nav-bottom__item--active" id="nav-tutorials">
+                    </Link>
+                    <Link href="/tutorials" className="nav-bottom__item nav-bottom__item--active" id="nav-tutorials">
                         <span className="nav-bottom__icon"><IconBook size={22} /></span>
                         <span>Tutoriale</span>
-                    </a>
-                    <a href="#" className="nav-bottom__item" id="nav-about">
+                    </Link>
+                    <Link href="/despre" className="nav-bottom__item" id="nav-about">
                         <span className="nav-bottom__icon"><IconUser size={22} /></span>
                         <span>Despre</span>
-                    </a>
+                    </Link>
                 </div>
             </nav>
         </>

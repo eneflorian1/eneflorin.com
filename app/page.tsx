@@ -86,96 +86,65 @@ export default function Home() {
       <Header />
 
       <main className="page-content">
-        {/* ===== HERO ===== */}
-        <section className="hero hero--home">
+        {/* ===== SERVICE CARDS ONLY ===== */}
+        <section className="services-home">
           <div className="container">
-            <div className="hero__content">
-              <div className="hero__pill animate-in">
-                <span className="pill"><IconSparkles size={14} /> Platforma ta de învățare</span>
-              </div>
-              <h1 className="hero__title animate-in animate-delay-1">
-                Învață{" "}
-                <span className="gradient-text">tehnologie</span>
-                <br />pas cu pas
-              </h1>
-              <p className="hero__description animate-in animate-delay-2">
-                Tutoriale clare în română, cu text și audio.
-                Blockchain, AI și multe altele — pe înțelesul tuturor.
-              </p>
-              <div className="hero__actions animate-in animate-delay-3">
-                <Link href="/tutorials" className="btn btn--primary" id="cta-explore">
-                  <IconBook size={18} />
-                  Explorează Tutorialele
-                </Link>
-                <Link href="/tutorials/blockchain" className="btn btn--secondary" id="cta-latest">
-                  <IconArrowRight size={18} />
-                  Cel Mai Nou
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ===== STATS ===== */}
-        <section className="stats-section animate-in animate-delay-3">
-          <div className="container">
-            <div className="stats-grid">
-              {stats.map((s, i) => {
-                const StatIcon = s.icon;
-                return (
-                  <div key={s.label} className="stats-card" style={{ animationDelay: `${0.1 * (i + 1)}s` }}>
-                    <div className="stats-card__icon">
-                      <StatIcon size={20} />
+            <div className="services-grid">
+              {/* Card 1: Agents */}
+              <div className="service-card-wrapper animate-in animate-delay-1">
+                <Link href="/agents" className="spotlight-card" id="spotlight-agents">
+                  <div className="spotlight-card__image">
+                    <div style={{ background: 'linear-gradient(45deg, #06b6d4, #3b82f6)', height: '200px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+                      <IconCpu size={64} />
                     </div>
-                    <div className="stats-card__info">
-                      <span className="stats-card__value">{s.value}</span>
-                      <span className="stats-card__label">{s.label}</span>
+                    <div className="spotlight-card__overlay">
+                      <span className="badge badge--new"><IconSparkles size={12} /> Exclusiv</span>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+                  <div className="spotlight-card__body">
+                    <h3 className="spotlight-card__title">
+                      <span className="spotlight-card__icon-wrap">
+                        <IconRobot size={20} />
+                      </span>
+                      Agenți Autonomi AI
+                    </h3>
+                    <p className="spotlight-card__description">
+                      Agenți inteligenți care lucrează pentru tine 24/7. Automatizare, interacțiune și eficiență maximă pentru afacerea ta.
+                    </p>
+                  </div>
+                </Link>
+                <div className="service-pricing">
+                  <div className="price-main">$499 <span className="price-unit">/ pachet</span></div>
+                  <div className="price-crypto">~ 0.007 BTC</div>
+                </div>
+              </div>
 
-        {/* ===== SPOTLIGHT: Featured Tutorial ===== */}
-        <section className="section">
-          <div className="container">
-            <div className="section__header animate-in">
-              <h2>Tutorial Recomandat</h2>
-              <p className="section__subtitle">Începe să înveți acum</p>
+              {/* Card 2: UGC */}
+              <div className="service-card-wrapper animate-in animate-delay-2">
+                <Link href="/ugc" className="spotlight-card" id="spotlight-ugc">
+                  <div className="spotlight-card__image">
+                    <div style={{ background: 'linear-gradient(45deg, #ec4899, #8b5cf6)', height: '200px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+                      <IconUser size={64} />
+                    </div>
+                  </div>
+                  <div className="spotlight-card__body">
+                    <h3 className="spotlight-card__title">
+                      <span className="spotlight-card__icon-wrap">
+                        <IconGlobe size={20} />
+                      </span>
+                      User Generated Content
+                    </h3>
+                    <p className="spotlight-card__description">
+                      Strategii și conținut UGC pentru a crește încrederea și vizibilitatea brandului tău pe platformele de social media.
+                    </p>
+                  </div>
+                </Link>
+                <div className="service-pricing">
+                  <div className="price-main">$299 <span className="price-unit">/ campanie</span></div>
+                  <div className="price-crypto">~ 0.004 BTC</div>
+                </div>
+              </div>
             </div>
-            <Link href="/tutorials/blockchain" className="spotlight-card animate-in animate-delay-1" id="spotlight-blockchain">
-              <div className="spotlight-card__image">
-                <img src="/images/blockchain-cover.png" alt="Introducere în Blockchain" />
-                <div className="spotlight-card__overlay">
-                  <span className="badge badge--new"><IconSparkles size={12} /> Nou</span>
-                </div>
-              </div>
-              <div className="spotlight-card__body">
-                <div className="spotlight-card__badges">
-                  <span className="badge badge--text"><IconDocument size={12} /> Text</span>
-                  <span className="badge badge--audio"><IconHeadphones size={12} /> Audio</span>
-                </div>
-                <h3 className="spotlight-card__title">
-                  <span className="spotlight-card__icon-wrap">
-                    <IconLink size={20} />
-                  </span>
-                  Introducere în Blockchain
-                </h3>
-                <p className="spotlight-card__description">
-                  Ce este blockchain-ul, cum funcționează și de ce contează. Un ghid complet pentru începători.
-                </p>
-                <div className="spotlight-card__footer">
-                  <span className="spotlight-card__duration">
-                    <IconClock size={14} /> 8 min lectură · 3 min audio
-                  </span>
-                  <span className="spotlight-card__cta">
-                    Citește acum <IconArrowRight size={16} />
-                  </span>
-                </div>
-              </div>
-            </Link>
           </div>
         </section>
 
@@ -215,44 +184,23 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* ===== ABOUT / CTA SECTION ===== */}
-        <section className="about-section animate-in">
-          <div className="container">
-            <div className="about-card">
-              <div className="about-card__icon">
-                <IconUser size={28} />
-              </div>
-              <h3 className="about-card__title">Despre Ene Florin</h3>
-              <p className="about-card__text">
-                Pasionat de tehnologie, blockchain și inteligență artificială.
-                Creez tutoriale în limba română pentru a face tehnologia accesibilă tuturor.
-              </p>
-              <div className="about-card__actions">
-                <Link href="/tutorials" className="btn btn--primary btn--sm">
-                  <IconBook size={16} /> Începe să Înveți
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       {/* Fixed Bottom Nav */}
       <nav className="nav-bottom">
         <div className="nav-bottom__inner">
-          <a href="/" className="nav-bottom__item nav-bottom__item--active" id="nav-home">
+          <Link href="/" className="nav-bottom__item nav-bottom__item--active" id="nav-home">
             <span className="nav-bottom__icon"><IconHome size={22} /></span>
             <span>Acasă</span>
-          </a>
-          <a href="/tutorials" className="nav-bottom__item" id="nav-tutorials">
+          </Link>
+          <Link href="/tutorials" className="nav-bottom__item" id="nav-tutorials">
             <span className="nav-bottom__icon"><IconBook size={22} /></span>
             <span>Tutoriale</span>
-          </a>
-          <a href="#" className="nav-bottom__item" id="nav-about">
+          </Link>
+          <Link href="/despre" className="nav-bottom__item" id="nav-about">
             <span className="nav-bottom__icon"><IconUser size={22} /></span>
             <span>Despre</span>
-          </a>
+          </Link>
         </div>
       </nav>
     </>
