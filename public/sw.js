@@ -1,8 +1,10 @@
 // Service Worker — eneflorin.com PWA
-const CACHE_NAME = "ef-tutoriale-v1";
+const CACHE_NAME = "ef-tutoriale-v2";
 const PRECACHE_URLS = [
     "/",
     "/index.html",
+    "/despre",
+    "/retea-neuronala",
     "/tutorials/blockchain",
     "/icon-192.png",
     "/icon-512.png",
