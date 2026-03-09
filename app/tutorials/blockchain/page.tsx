@@ -2,6 +2,22 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import {
+    IconHome,
+    IconBook,
+    IconUser,
+    IconHeadphones,
+    IconSparkles,
+    IconPlay,
+    IconPause,
+    IconArrowLeft,
+    IconShuffle,
+    IconEye,
+    IconShield,
+    IconLightbulb,
+    IconGraduation,
+    IconBookOpen,
+} from "../../icons";
 
 function AudioPlayer() {
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -77,10 +93,10 @@ function AudioPlayer() {
                     id="audio-play-btn"
                     aria-label={isPlaying ? "Pauză" : "Redare"}
                 >
-                    {isPlaying ? "⏸" : "▶"}
+                    {isPlaying ? <IconPause size={18} /> : <IconPlay size={18} />}
                 </button>
                 <div className="audio-player__info">
-                    <div className="audio-player__title">🎧 Ascultă tutorialul</div>
+                    <div className="audio-player__title"><IconHeadphones size={14} /> Ascultă tutorialul</div>
                     <div className="audio-player__time">
                         {currentTime} / {duration}
                     </div>
@@ -108,7 +124,7 @@ export default function BlockchainTutorial() {
             <header className="site-header">
                 <div className="site-header__inner">
                     <a href="/" className="site-header__logo" id="header-logo">
-                        📚 EneFlorin
+                        <IconBookOpen size={22} /> EneFlorin
                     </a>
                     <nav className="site-header__nav">
                         <a href="/" className="site-header__nav-link" id="desktop-nav-home">
@@ -128,18 +144,18 @@ export default function BlockchainTutorial() {
                 <div className="container">
                     {/* Back link */}
                     <Link href="/" className="article__back" id="back-to-home">
-                        ← Înapoi la tutoriale
+                        <IconArrowLeft size={16} /> Înapoi la tutoriale
                     </Link>
 
                     {/* Header */}
                     <header className="article__header animate-in">
                         <div className="article__meta">
-                            <span className="badge badge--new">✨ Nou</span>
-                            <span className="badge badge--audio">🎧 Audio</span>
+                            <span className="badge badge--new"><IconSparkles size={12} /> Nou</span>
+                            <span className="badge badge--audio"><IconHeadphones size={12} /> Audio</span>
                             <span className="article__date">9 Martie 2026</span>
                         </div>
                         <h1 className="article__title">
-                            🔗 Introducere în{" "}
+                            Introducere în{" "}
                             <span className="gradient-text">Blockchain</span>
                         </h1>
                         <p className="article__intro">
@@ -165,7 +181,8 @@ export default function BlockchainTutorial() {
                         </p>
                         <div className="highlight-box">
                             <p>
-                                💡 Imaginează-ți un caiet în care scrii fiecare tranzacție. Odată
+                                <span className="highlight-box__icon"><IconLightbulb size={18} /></span>
+                                Imaginează-ți un caiet în care scrii fiecare tranzacție. Odată
                                 ce o pagină este completată, o sigilezi și o legi de pagina
                                 anterioară. Nimeni nu poate modifica o pagină fără să rupă
                                 sigiliul. Aceasta este esența blockchain-ului.
@@ -190,19 +207,19 @@ export default function BlockchainTutorial() {
 
                         <h2>De ce este important?</h2>
 
-                        <h3>🔀 Descentralizare</h3>
+                        <h3><span className="article__section-icon"><IconShuffle size={18} /></span> Descentralizare</h3>
                         <p>
                             Nu există o autoritate centrală care controlează datele. În schimb,
                             fiecare participant din rețea deține o copie completă a registrului.
                         </p>
 
-                        <h3>👁 Transparență</h3>
+                        <h3><span className="article__section-icon"><IconEye size={18} /></span> Transparență</h3>
                         <p>
                             Toate tranzacțiile sunt vizibile pentru toți participanții, ceea ce
                             reduce frauda și crește încrederea.
                         </p>
 
-                        <h3>🛡 Securitate</h3>
+                        <h3><span className="article__section-icon"><IconShield size={18} /></span> Securitate</h3>
                         <p>
                             Datorită criptografiei și distribuției, este extrem de dificil să
                             modifici datele odată înregistrate.
@@ -243,7 +260,8 @@ export default function BlockchainTutorial() {
 
                         <div className="highlight-box">
                             <p>
-                                🎓 Acesta a fost primul nostru tutorial. Te așteptăm și la
+                                <span className="highlight-box__icon"><IconGraduation size={18} /></span>
+                                Acesta a fost primul nostru tutorial. Te așteptăm și la
                                 următoarele lecții! Următorul subiect: Smart Contracts &
                                 Ethereum.
                             </p>
@@ -256,15 +274,15 @@ export default function BlockchainTutorial() {
             <nav className="nav-bottom">
                 <div className="nav-bottom__inner">
                     <a href="/" className="nav-bottom__item" id="nav-home">
-                        <span className="nav-bottom__icon">🏠</span>
+                        <span className="nav-bottom__icon"><IconHome size={22} /></span>
                         <span>Acasă</span>
                     </a>
                     <a href="/tutorials/blockchain" className="nav-bottom__item nav-bottom__item--active" id="nav-tutorials">
-                        <span className="nav-bottom__icon">📚</span>
+                        <span className="nav-bottom__icon"><IconBook size={22} /></span>
                         <span>Tutoriale</span>
                     </a>
                     <a href="#" className="nav-bottom__item" id="nav-about">
-                        <span className="nav-bottom__icon">👤</span>
+                        <span className="nav-bottom__icon"><IconUser size={22} /></span>
                         <span>Despre</span>
                     </a>
                 </div>

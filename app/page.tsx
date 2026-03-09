@@ -1,6 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import {
+  IconHome,
+  IconBook,
+  IconUser,
+  IconHeadphones,
+  IconDocument,
+  IconSparkles,
+  IconCalendar,
+  IconLink,
+  IconScroll,
+  IconCpu,
+  IconGlobe,
+  IconClock,
+  IconArrowRight,
+  IconBookOpen,
+} from "./icons";
 
 const tutorials = [
   {
@@ -11,15 +27,28 @@ const tutorials = [
     date: "9 Mar 2026",
     duration: "8 min lectură · 3 min audio",
     badges: ["text", "audio", "new"],
-    icon: "🔗",
+    icon: "link" as const,
   },
 ];
 
 const upcomingTopics = [
-  { title: "Smart Contracts & Ethereum", icon: "📜" },
-  { title: "Inteligență Artificială — De la zero", icon: "🤖" },
-  { title: "Web3 & Aplicații Descentralizate", icon: "🌐" },
+  { title: "Smart Contracts & Ethereum", icon: "scroll" as const },
+  { title: "Inteligență Artificială — De la zero", icon: "cpu" as const },
+  { title: "Web3 & Aplicații Descentralizate", icon: "globe" as const },
 ];
+
+const iconMap = {
+  link: IconLink,
+  scroll: IconScroll,
+  cpu: IconCpu,
+  globe: IconGlobe,
+};
+
+const badgeIconMap = {
+  audio: { icon: IconHeadphones, label: "Audio" },
+  text: { icon: IconDocument, label: "Text" },
+  new: { icon: IconSparkles, label: "Nou" },
+};
 
 export default function Home() {
   return (
@@ -28,7 +57,7 @@ export default function Home() {
       <header className="site-header">
         <div className="site-header__inner">
           <a href="/" className="site-header__logo" id="header-logo">
-            📚 EneFlorin
+            <IconBookOpen size={22} /> EneFlorin
           </a>
           <nav className="site-header__nav">
             <a href="/" className="site-header__nav-link site-header__nav-link--active" id="desktop-nav-home">
@@ -49,7 +78,7 @@ export default function Home() {
         <div className="container">
           <div className="hero__content">
             <div className="hero__pill animate-in">
-              <span className="pill">📚 Tutoriale Tech</span>
+              <span className="pill"><IconBookOpen size={14} /> Tutoriale Tech</span>
             </div>
             <h1 className="hero__title animate-in animate-delay-1">
               Învață <span className="gradient-text">tehnologie</span> pas cu
@@ -71,34 +100,46 @@ export default function Home() {
             <p className="section__subtitle">Începe să înveți acum</p>
           </div>
           <div className="tutorial-list">
-            {tutorials.map((t, i) => (
-              <Link
-                key={t.slug}
-                href={`/tutorials/${t.slug}`}
-                className={`card tutorial-card animate-in animate-delay-${i + 3}`}
-                id={`tutorial-${t.slug}`}
-              >
-                <div className="tutorial-card__meta">
-                  {t.badges.map((b) => (
-                    <span key={b} className={`badge badge--${b}`}>
-                      {b === "audio" ? "🎧 Audio" : b === "text" ? "📝 Text" : "✨ Nou"}
+            {tutorials.map((t, i) => {
+              const TutorialIcon = iconMap[t.icon];
+              return (
+                <Link
+                  key={t.slug}
+                  href={`/tutorials/${t.slug}`}
+                  className={`card tutorial-card animate-in animate-delay-${i + 3}`}
+                  id={`tutorial-${t.slug}`}
+                >
+                  <div className="tutorial-card__meta">
+                    {t.badges.map((b) => {
+                      const badgeInfo = badgeIconMap[b as keyof typeof badgeIconMap];
+                      const BadgeIcon = badgeInfo.icon;
+                      return (
+                        <span key={b} className={`badge badge--${b}`}>
+                          <BadgeIcon size={12} /> {badgeInfo.label}
+                        </span>
+                      );
+                    })}
+                  </div>
+                  <div>
+                    <h3 className="tutorial-card__title">
+                      <span className="tutorial-card__icon-wrap">
+                        <TutorialIcon size={20} />
+                      </span>
+                      {t.title}
+                    </h3>
+                    <p className="tutorial-card__description">{t.description}</p>
+                  </div>
+                  <div className="tutorial-card__footer">
+                    <span className="tutorial-card__duration">
+                      <IconClock size={14} /> {t.duration}
                     </span>
-                  ))}
-                </div>
-                <div>
-                  <h3 className="tutorial-card__title">
-                    {t.icon} {t.title}
-                  </h3>
-                  <p className="tutorial-card__description">{t.description}</p>
-                </div>
-                <div className="tutorial-card__footer">
-                  <span className="tutorial-card__duration">
-                    ⏱ {t.duration}
-                  </span>
-                  <span className="tutorial-card__arrow">→</span>
-                </div>
-              </Link>
-            ))}
+                    <span className="tutorial-card__arrow">
+                      <IconArrowRight size={16} />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -113,22 +154,28 @@ export default function Home() {
             </p>
           </div>
           <div className="tutorial-list">
-            {upcomingTopics.map((topic, i) => (
-              <div
-                key={topic.title}
-                className={`card animate-in animate-delay-${i + 1}`}
-                style={{ opacity: 0.6, cursor: "default" }}
-              >
-                <div className="tutorial-card">
-                  <div className="tutorial-card__meta">
-                    <span className="badge badge--text">📅 În curând</span>
+            {upcomingTopics.map((topic, i) => {
+              const TopicIcon = iconMap[topic.icon];
+              return (
+                <div
+                  key={topic.title}
+                  className={`card animate-in animate-delay-${i + 1}`}
+                  style={{ opacity: 0.6, cursor: "default" }}
+                >
+                  <div className="tutorial-card">
+                    <div className="tutorial-card__meta">
+                      <span className="badge badge--text"><IconCalendar size={12} /> În curând</span>
+                    </div>
+                    <h3 className="tutorial-card__title">
+                      <span className="tutorial-card__icon-wrap">
+                        <TopicIcon size={20} />
+                      </span>
+                      {topic.title}
+                    </h3>
                   </div>
-                  <h3 className="tutorial-card__title">
-                    {topic.icon} {topic.title}
-                  </h3>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -137,15 +184,15 @@ export default function Home() {
       <nav className="nav-bottom">
         <div className="nav-bottom__inner">
           <a href="/" className="nav-bottom__item nav-bottom__item--active" id="nav-home">
-            <span className="nav-bottom__icon">🏠</span>
+            <span className="nav-bottom__icon"><IconHome size={22} /></span>
             <span>Acasă</span>
           </a>
           <a href="/tutorials/blockchain" className="nav-bottom__item" id="nav-tutorials">
-            <span className="nav-bottom__icon">📚</span>
+            <span className="nav-bottom__icon"><IconBook size={22} /></span>
             <span>Tutoriale</span>
           </a>
           <a href="#" className="nav-bottom__item" id="nav-about">
-            <span className="nav-bottom__icon">👤</span>
+            <span className="nav-bottom__icon"><IconUser size={22} /></span>
             <span>Despre</span>
           </a>
         </div>
