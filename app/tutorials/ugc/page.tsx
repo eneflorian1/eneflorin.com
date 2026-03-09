@@ -181,6 +181,10 @@ export default function UGCTutorial() {
                         <span className="nav-bottom__icon"><IconBook size={22} /></span>
                         <span>Tutoriale</span>
                     </Link>
+                    <Link href="/retea-neuronala" className="nav-bottom__item" id="nav-astazi">
+                        <span className="nav-bottom__icon"><IconSparkles size={22} /></span>
+                        <span>Astăzi</span>
+                    </Link>
                     <Link href="/despre" className="nav-bottom__item" id="nav-about">
                         <span className="nav-bottom__icon"><IconUser size={22} /></span>
                         <span>Despre</span>
