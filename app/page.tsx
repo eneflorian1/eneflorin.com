@@ -24,6 +24,26 @@ const upcomingTopics = [
 export default function Home() {
   return (
     <div className="page-content">
+      {/* Fixed Header */}
+      <header className="site-header">
+        <div className="site-header__inner">
+          <a href="/" className="site-header__logo" id="header-logo">
+            📚 EneFlorin
+          </a>
+          <nav className="site-header__nav">
+            <a href="/" className="site-header__nav-link site-header__nav-link--active" id="desktop-nav-home">
+              Acasă
+            </a>
+            <a href="/tutorials/blockchain" className="site-header__nav-link" id="desktop-nav-tutorials">
+              Tutoriale
+            </a>
+            <a href="#" className="site-header__nav-link" id="desktop-nav-about">
+              Despre
+            </a>
+          </nav>
+        </div>
+      </header>
+
       {/* Hero */}
       <section className="hero">
         <div className="container">
@@ -113,7 +133,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Bottom Nav */}
+      {/* Fixed Bottom Nav (mobile only) */}
       <nav className="nav-bottom">
         <div className="nav-bottom__inner">
           <a href="/" className="nav-bottom__item nav-bottom__item--active" id="nav-home">

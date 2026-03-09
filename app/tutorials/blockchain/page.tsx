@@ -104,6 +104,26 @@ function AudioPlayer() {
 export default function BlockchainTutorial() {
     return (
         <div className="page-content">
+            {/* Fixed Header */}
+            <header className="site-header">
+                <div className="site-header__inner">
+                    <a href="/" className="site-header__logo" id="header-logo">
+                        📚 EneFlorin
+                    </a>
+                    <nav className="site-header__nav">
+                        <a href="/" className="site-header__nav-link" id="desktop-nav-home">
+                            Acasă
+                        </a>
+                        <a href="/tutorials/blockchain" className="site-header__nav-link site-header__nav-link--active" id="desktop-nav-tutorials">
+                            Tutoriale
+                        </a>
+                        <a href="#" className="site-header__nav-link" id="desktop-nav-about">
+                            Despre
+                        </a>
+                    </nav>
+                </div>
+            </header>
+
             <article className="article">
                 <div className="container">
                     {/* Back link */}
@@ -232,7 +252,7 @@ export default function BlockchainTutorial() {
                 </div>
             </article>
 
-            {/* Bottom Nav */}
+            {/* Fixed Bottom Nav (mobile only) */}
             <nav className="nav-bottom">
                 <div className="nav-bottom__inner">
                     <a href="/" className="nav-bottom__item" id="nav-home">
