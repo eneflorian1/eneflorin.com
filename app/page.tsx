@@ -86,6 +86,30 @@ export default function Home() {
       <Header />
 
       <main className="page-content">
+        {/* ===== HERO VIDEO ===== */}
+        <section className="hero-video">
+          <video
+            className="hero-video__bg"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="/videos/bg-video.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-video__overlay"></div>
+          <div className="hero-video__content animate-in">
+            <h1 className="hero-video__title">Viitorul e Aici</h1>
+            <p className="hero-video__subtitle">
+              Descoperă pachetul complet pentru roboți umanoizi și învață cum să construiești inteligență artificială aplicată.
+            </p>
+            <Link href="/tutorials/roboti-umanoizi" className="hero-video__btn">
+              <span>Pachetul Roboți Umanoizi</span>
+              <IconArrowRight size={18} />
+            </Link>
+          </div>
+        </section>
+
         {/* ===== SERVICE CARDS ONLY ===== */}
         <section className="services-home">
           <div className="container">

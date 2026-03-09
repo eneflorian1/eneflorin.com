@@ -12,6 +12,8 @@ export function Header() {
 
     const isHome = pathname === "/";
     const isTutorials = pathname?.startsWith("/tutorials");
+    const isAstazi = pathname === "/retea-neuronala";
+    const isDespre = pathname === "/despre";
 
     return (
         <>
@@ -37,9 +39,20 @@ export function Header() {
                             >
                                 Tutoriale
                             </Link>
-                            <a href="#" className="site-header__nav-link" id="desktop-nav-about">
+                            <Link
+                                href="/retea-neuronala"
+                                className={`site-header__nav-link ${isAstazi ? 'site-header__nav-link--active' : ''}`}
+                                id="desktop-nav-astazi"
+                            >
+                                Astăzi
+                            </Link>
+                            <Link
+                                href="/despre"
+                                className={`site-header__nav-link ${isDespre ? 'site-header__nav-link--active' : ''}`}
+                                id="desktop-nav-about"
+                            >
                                 Despre
-                            </a>
+                            </Link>
                         </nav>
 
                         <button

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "../components/Header";
+import { NeuralNetworkBlog } from "../components/NeuralNetworkBlog";
 import {
     IconHome,
     IconBook,
@@ -8,70 +9,31 @@ import {
     IconArrowLeft,
 } from "../icons";
 
-function IconNetwork({ size = 24, className = "" }: { size?: number; className?: string }) {
-    return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
-            <circle cx="6" cy="6" r="3" />
-            <circle cx="18" cy="6" r="3" />
-            <circle cx="6" cy="18" r="3" />
-            <circle cx="18" cy="18" r="3" />
-            <line x1="6" y1="9" x2="6" y2="15" />
-            <line x1="18" y1="9" x2="18" y2="15" />
-            <line x1="9" y1="6" x2="15" y2="6" />
-            <line x1="9" y1="18" x2="15" y2="18" />
-            <line x1="8" y1="8" x2="16" y2="16" />
-            <line x1="8" y1="16" x2="16" y2="8" />
-        </svg>
-    );
-}
-
 export default function ReteaNeuronala() {
     return (
         <>
             <Header />
 
-            <main className="page-content">
-                <section className="hero">
+            <main className="page-content" style={{ paddingBottom: '100px' }}>
+                <section className="hero" style={{ padding: '2rem 0 1rem' }}>
                     <div className="container">
-                        <Link href="/despre" className="article__back animate-in" id="back-to-despre">
+                        <Link href="/despre" className="article__back animate-in" id="back-to-despre" style={{ marginBottom: '1rem' }}>
                             <IconArrowLeft size={16} /> Înapoi
                         </Link>
 
-                        <div className="hero__content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', paddingTop: '2rem' }}>
-                            {/* Icon */}
-                            <div className="animate-in" style={{
-                                width: '96px',
-                                height: '96px',
-                                borderRadius: '24px',
-                                background: 'rgba(139, 92, 246, 0.1)',
-                                color: '#8b5cf6',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                marginBottom: '1.5rem',
-                                border: '1px solid rgba(139, 92, 246, 0.2)',
-                                boxShadow: '0 8px 32px rgba(139, 92, 246, 0.15)',
-                            }}>
-                                <IconNetwork size={52} className="animate-pulse" />
-                            </div>
-
-                            {/* Badges */}
-                            <div className="animate-in animate-delay-1" style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
-                                <span className="badge" style={{ background: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6' }}>
-                                    <IconSparkles size={12} /> Live Updates
-                                </span>
-                                <span className="badge badge--new">În curând</span>
-                            </div>
-
-                            <h1 className="hero__title animate-in animate-delay-2">
+                        <div className="hero__content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '2rem' }}>
+                            <h1 className="hero__title animate-in">
                                 Astăzi — <span className="gradient-text">Rețeaua Neuronală</span>
                             </h1>
-
-                            <p className="hero__description animate-in animate-delay-3" style={{ maxWidth: '560px' }}>
-                                În acest modul vom avea o rețea neuronală care va conecta direct toate tutorialele disponibile cu evenimentele actuale și relevante ce se întâmplă zilnic pe glob. Fii la curent cu inovația în timp real.
+                            <p className="hero__description animate-in animate-delay-1" style={{ maxWidth: '600px', margin: '0 auto' }}>
+                                Adaugă cunoștințe noi în rețea. Fiecare domeniu este un nod conectat ce reflectă evoluția informației tale în timp real.
                             </p>
                         </div>
                     </div>
+                </section>
+
+                <section className="container animate-in animate-delay-2">
+                    <NeuralNetworkBlog />
                 </section>
             </main>
 

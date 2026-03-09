@@ -787,6 +787,127 @@ p {
   gap: 1rem;
 }
 
+/* --- Hero Video --- */
+.hero-video {
+  position: relative;
+  width: 100%;
+  height: 65vh;
+  /* adjust as needed */
+  min-height: 480px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -20px;
+  /* pull up slightly under header */
+  background: rgba(15, 23, 42, 1);
+}
+
+@media (min-width: 768px) {
+  .hero-video {
+    height: 80vh;
+  }
+}
+
+.hero-video__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 0;
+}
+
+.hero-video__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* A dark gradient overlay so text/buttons pop, while keeping the design nice */
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.7) 100%);
+  z-index: 1;
+}
+
+.hero-video__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+}
+
+.hero-video__title {
+  color: #fff;
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
+}
+
+.hero-video__subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  margin-bottom: 5rem;
+  /* Push button much lower on mobile */
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+  .hero-video__subtitle {
+    margin-bottom: 4rem;
+    /* Desktop margin */
+  }
+}
+
+.hero-video__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  /* Greyish neutral glass effect */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.95);
+  padding: 0.4rem 1rem;
+  /* smaller button on mobile */
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  /* smaller text on mobile */
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+  .hero-video__btn {
+    padding: 0.6rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+}
+
+.hero-video__btn:hover {
+  background: var(--gradient-hero);
+  /* Color appears on hover! */
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  color: #fff;
+}
+
+.hero-video__btn:active {
+  transform: translateY(0);
+}
+
 /* ===========================
    FIXED BOTTOM NAV (mobile)
    iOS-style with dot indicator
