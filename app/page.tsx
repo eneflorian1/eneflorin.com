@@ -63,7 +63,7 @@ export default function Home() {
             <a href="/" className="site-header__nav-link site-header__nav-link--active" id="desktop-nav-home">
               Acasă
             </a>
-            <a href="/tutorials/blockchain" className="site-header__nav-link" id="desktop-nav-tutorials">
+            <a href="/tutorials" className="site-header__nav-link" id="desktop-nav-tutorials">
               Tutoriale
             </a>
             <a href="#" className="site-header__nav-link" id="desktop-nav-about">
@@ -187,7 +187,7 @@ export default function Home() {
             <span className="nav-bottom__icon"><IconHome size={22} /></span>
             <span>Acasă</span>
           </a>
-          <a href="/tutorials/blockchain" className="nav-bottom__item" id="nav-tutorials">
+          <a href="/tutorials" className="nav-bottom__item" id="nav-tutorials">
             <span className="nav-bottom__icon"><IconBook size={22} /></span>
             <span>Tutoriale</span>
           </a>
