@@ -1,0 +1,35 @@
+Introducere în Blockchain.
+
+Ce este blockchain-ul?
+
+Blockchain-ul este o tehnologie revoluționară care a schimbat modul în care gândim despre date, încredere și tranzacții digitale. La bază, un blockchain este un registru digital distribuit, care stochează informații în blocuri conectate între ele printr-un lanț criptografic.
+
+Imaginează-ți un caiet în care scrii fiecare tranzacție. Odată ce o pagină este completată, o sigilezi și o legi de pagina anterioară. Nimeni nu poate modifica o pagină fără să rupă sigiliul. Aceasta este esența blockchain-ului.
+
+Cum funcționează?
+
+Fiecare bloc conține trei elemente cheie: datele tranzacțiilor, un hash unic care identifică blocul, și hash-ul blocului anterior. Această legătură face lanțul practic imposibil de modificat.
+
+Când cineva dorește să adauge o tranzacție nouă, aceasta este verificată de o rețea de computere numite noduri. Dacă majoritatea nodurilor sunt de acord că tranzacția este validă, ea este adăugată într-un bloc nou.
+
+De ce este important?
+
+Primul avantaj major este descentralizarea. Nu există o autoritate centrală care controlează datele. În schimb, fiecare participant din rețea deține o copie completă a registrului.
+
+Al doilea avantaj este transparența. Toate tranzacțiile sunt vizibile pentru toți participanții, ceea ce reduce frauda și crește încrederea.
+
+Al treilea avantaj este securitatea. Datorită criptografiei și distribuției, este extrem de dificil să modifici datele odată înregistrate.
+
+Aplicații practice.
+
+Bitcoin a fost prima aplicație de succes a blockchain-ului, lansată în 2009 de Satoshi Nakamoto. Dar tehnologia merge mult dincolo de criptomonede.
+
+Contractele inteligente, popularizate de Ethereum, permit executarea automată a acordurilor digitale fără intermediari.
+
+Blockchain-ul este folosit și în lanțurile de aprovizionare, pentru a urmări produsele de la producător la consumator. În domeniul sănătății, pentru a securiza datele medicale. Și în votul electronic, pentru a asigura transparența alegerilor.
+
+Concluzie.
+
+Blockchain-ul nu este doar o modă trecătoare. Este o tehnologie fundamentală care redefinește încrederea digitală. Înțelegerea principiilor sale de bază este esențială pentru oricine dorește să fie la curent cu viitorul tehnologiei.
+
+Acesta a fost primul nostru tutorial. Te așteptăm și la următoarele lecții!
