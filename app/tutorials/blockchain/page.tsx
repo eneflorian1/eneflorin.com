@@ -119,7 +119,7 @@ function AudioPlayer() {
 
 export default function BlockchainTutorial() {
     return (
-        <div className="page-content">
+        <>
             {/* Fixed Header */}
             <header className="site-header">
                 <div className="site-header__inner">
@@ -140,137 +140,139 @@ export default function BlockchainTutorial() {
                 </div>
             </header>
 
-            <article className="article">
-                <div className="container">
-                    {/* Back link */}
-                    <Link href="/" className="article__back" id="back-to-home">
-                        <IconArrowLeft size={16} /> Înapoi la tutoriale
-                    </Link>
+            <main className="page-content">
+                <article className="article">
+                    <div className="container">
+                        {/* Back link */}
+                        <Link href="/" className="article__back" id="back-to-home">
+                            <IconArrowLeft size={16} /> Înapoi la tutoriale
+                        </Link>
 
-                    {/* Header */}
-                    <header className="article__header animate-in">
-                        <div className="article__meta">
-                            <span className="badge badge--new"><IconSparkles size={12} /> Nou</span>
-                            <span className="badge badge--audio"><IconHeadphones size={12} /> Audio</span>
-                            <span className="article__date">9 Martie 2026</span>
-                        </div>
-                        <h1 className="article__title">
-                            Introducere în{" "}
-                            <span className="gradient-text">Blockchain</span>
-                        </h1>
-                        <p className="article__intro">
-                            Ce este blockchain-ul, cum funcționează și de ce va schimba lumea
-                            digitală. Un ghid complet pentru începători.
-                        </p>
-                    </header>
-
-                    {/* Audio Player */}
-                    <div className="animate-in animate-delay-1" style={{ marginBottom: "2rem" }}>
-                        <AudioPlayer />
-                    </div>
-
-                    {/* Article Body */}
-                    <div className="article__body animate-in animate-delay-2">
-                        <h2>Ce este blockchain-ul?</h2>
-                        <p>
-                            Blockchain-ul este o tehnologie revoluționară care a schimbat modul
-                            în care gândim despre date, încredere și tranzacții digitale. La
-                            bază, un blockchain este un <strong>registru digital distribuit</strong>,
-                            care stochează informații în blocuri conectate între ele printr-un
-                            lanț criptografic.
-                        </p>
-                        <div className="highlight-box">
-                            <p>
-                                <span className="highlight-box__icon"><IconLightbulb size={18} /></span>
-                                Imaginează-ți un caiet în care scrii fiecare tranzacție. Odată
-                                ce o pagină este completată, o sigilezi și o legi de pagina
-                                anterioară. Nimeni nu poate modifica o pagină fără să rupă
-                                sigiliul. Aceasta este esența blockchain-ului.
+                        {/* Header */}
+                        <header className="article__header animate-in">
+                            <div className="article__meta">
+                                <span className="badge badge--new"><IconSparkles size={12} /> Nou</span>
+                                <span className="badge badge--audio"><IconHeadphones size={12} /> Audio</span>
+                                <span className="article__date">9 Martie 2026</span>
+                            </div>
+                            <h1 className="article__title">
+                                Introducere în{" "}
+                                <span className="gradient-text">Blockchain</span>
+                            </h1>
+                            <p className="article__intro">
+                                Ce este blockchain-ul, cum funcționează și de ce va schimba lumea
+                                digitală. Un ghid complet pentru începători.
                             </p>
+                        </header>
+
+                        {/* Audio Player */}
+                        <div className="animate-in animate-delay-1" style={{ marginBottom: "2rem" }}>
+                            <AudioPlayer />
                         </div>
 
-                        <h2>Cum funcționează?</h2>
-                        <p>
-                            Fiecare bloc conține trei elemente cheie:
-                        </p>
-                        <ul>
-                            <li><strong>Datele tranzacțiilor</strong> — informațiile propriu-zise stocate în bloc</li>
-                            <li><strong>Un hash unic</strong> — identificatorul blocului, ca o amprentă digitală</li>
-                            <li><strong>Hash-ul blocului anterior</strong> — legătura care formează lanțul</li>
-                        </ul>
-                        <p>
-                            Când cineva dorește să adauge o tranzacție nouă, aceasta este
-                            verificată de o rețea de computere numite <strong>noduri</strong>.
-                            Dacă majoritatea nodurilor sunt de acord că tranzacția este validă,
-                            ea este adăugată într-un bloc nou.
-                        </p>
-
-                        <h2>De ce este important?</h2>
-
-                        <h3><span className="article__section-icon"><IconShuffle size={18} /></span> Descentralizare</h3>
-                        <p>
-                            Nu există o autoritate centrală care controlează datele. În schimb,
-                            fiecare participant din rețea deține o copie completă a registrului.
-                        </p>
-
-                        <h3><span className="article__section-icon"><IconEye size={18} /></span> Transparență</h3>
-                        <p>
-                            Toate tranzacțiile sunt vizibile pentru toți participanții, ceea ce
-                            reduce frauda și crește încrederea.
-                        </p>
-
-                        <h3><span className="article__section-icon"><IconShield size={18} /></span> Securitate</h3>
-                        <p>
-                            Datorită criptografiei și distribuției, este extrem de dificil să
-                            modifici datele odată înregistrate.
-                        </p>
-
-                        <h2>Aplicații practice</h2>
-                        <p>
-                            <strong>Bitcoin</strong> a fost prima aplicație de succes a
-                            blockchain-ului, lansată în 2009 de Satoshi Nakamoto. Dar
-                            tehnologia merge mult dincolo de criptomonede.
-                        </p>
-                        <ul>
-                            <li>
-                                <strong>Contracte inteligente</strong> — popularizate de Ethereum,
-                                permit executarea automată a acordurilor digitale fără intermediari
-                            </li>
-                            <li>
-                                <strong>Lanțuri de aprovizionare</strong> — urmărirea produselor
-                                de la producător la consumator
-                            </li>
-                            <li>
-                                <strong>Sănătate</strong> — securizarea datelor medicale ale
-                                pacienților
-                            </li>
-                            <li>
-                                <strong>Vot electronic</strong> — asigurarea transparenței
-                                alegerilor
-                            </li>
-                        </ul>
-
-                        <h2>Concluzie</h2>
-                        <p>
-                            Blockchain-ul nu este doar o modă trecătoare. Este o{" "}
-                            <strong>tehnologie fundamentală</strong> care redefinește încrederea
-                            digitală. Înțelegerea principiilor sale de bază este esențială
-                            pentru oricine dorește să fie la curent cu viitorul tehnologiei.
-                        </p>
-
-                        <div className="highlight-box">
+                        {/* Article Body */}
+                        <div className="article__body animate-in animate-delay-2">
+                            <h2>Ce este blockchain-ul?</h2>
                             <p>
-                                <span className="highlight-box__icon"><IconGraduation size={18} /></span>
-                                Acesta a fost primul nostru tutorial. Te așteptăm și la
-                                următoarele lecții! Următorul subiect: Smart Contracts &
-                                Ethereum.
+                                Blockchain-ul este o tehnologie revoluționară care a schimbat modul
+                                în care gândim despre date, încredere și tranzacții digitale. La
+                                bază, un blockchain este un <strong>registru digital distribuit</strong>,
+                                care stochează informații în blocuri conectate între ele printr-un
+                                lanț criptografic.
                             </p>
+                            <div className="highlight-box">
+                                <p>
+                                    <span className="highlight-box__icon"><IconLightbulb size={18} /></span>
+                                    Imaginează-ți un caiet în care scrii fiecare tranzacție. Odată
+                                    ce o pagină este completată, o sigilezi și o legi de pagina
+                                    anterioară. Nimeni nu poate modifica o pagină fără să rupă
+                                    sigiliul. Aceasta este esența blockchain-ului.
+                                </p>
+                            </div>
+
+                            <h2>Cum funcționează?</h2>
+                            <p>
+                                Fiecare bloc conține trei elemente cheie:
+                            </p>
+                            <ul>
+                                <li><strong>Datele tranzacțiilor</strong> — informațiile propriu-zise stocate în bloc</li>
+                                <li><strong>Un hash unic</strong> — identificatorul blocului, ca o amprentă digitală</li>
+                                <li><strong>Hash-ul blocului anterior</strong> — legătura care formează lanțul</li>
+                            </ul>
+                            <p>
+                                Când cineva dorește să adauge o tranzacție nouă, aceasta este
+                                verificată de o rețea de computere numite <strong>noduri</strong>.
+                                Dacă majoritatea nodurilor sunt de acord că tranzacția este validă,
+                                ea este adăugată într-un bloc nou.
+                            </p>
+
+                            <h2>De ce este important?</h2>
+
+                            <h3><span className="article__section-icon"><IconShuffle size={18} /></span> Descentralizare</h3>
+                            <p>
+                                Nu există o autoritate centrală care controlează datele. În schimb,
+                                fiecare participant din rețea deține o copie completă a registrului.
+                            </p>
+
+                            <h3><span className="article__section-icon"><IconEye size={18} /></span> Transparență</h3>
+                            <p>
+                                Toate tranzacțiile sunt vizibile pentru toți participanții, ceea ce
+                                reduce frauda și crește încrederea.
+                            </p>
+
+                            <h3><span className="article__section-icon"><IconShield size={18} /></span> Securitate</h3>
+                            <p>
+                                Datorită criptografiei și distribuției, este extrem de dificil să
+                                modifici datele odată înregistrate.
+                            </p>
+
+                            <h2>Aplicații practice</h2>
+                            <p>
+                                <strong>Bitcoin</strong> a fost prima aplicație de succes a
+                                blockchain-ului, lansată în 2009 de Satoshi Nakamoto. Dar
+                                tehnologia merge mult dincolo de criptomonede.
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>Contracte inteligente</strong> — popularizate de Ethereum,
+                                    permit executarea automată a acordurilor digitale fără intermediari
+                                </li>
+                                <li>
+                                    <strong>Lanțuri de aprovizionare</strong> — urmărirea produselor
+                                    de la producător la consumator
+                                </li>
+                                <li>
+                                    <strong>Sănătate</strong> — securizarea datelor medicale ale
+                                    pacienților
+                                </li>
+                                <li>
+                                    <strong>Vot electronic</strong> — asigurarea transparenței
+                                    alegerilor
+                                </li>
+                            </ul>
+
+                            <h2>Concluzie</h2>
+                            <p>
+                                Blockchain-ul nu este doar o modă trecătoare. Este o{" "}
+                                <strong>tehnologie fundamentală</strong> care redefinește încrederea
+                                digitală. Înțelegerea principiilor sale de bază este esențială
+                                pentru oricine dorește să fie la curent cu viitorul tehnologiei.
+                            </p>
+
+                            <div className="highlight-box">
+                                <p>
+                                    <span className="highlight-box__icon"><IconGraduation size={18} /></span>
+                                    Acesta a fost primul nostru tutorial. Te așteptăm și la
+                                    următoarele lecții! Următorul subiect: Smart Contracts &
+                                    Ethereum.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
+            </main>
 
-            {/* Fixed Bottom Nav (mobile only) */}
+            {/* Fixed Bottom Nav */}
             <nav className="nav-bottom">
                 <div className="nav-bottom__inner">
                     <a href="/" className="nav-bottom__item" id="nav-home">
@@ -287,6 +289,6 @@ export default function BlockchainTutorial() {
                     </a>
                 </div>
             </nav>
-        </div>
+        </>
     );
 }
