@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     follow: true,
     "max-snippet": -1,
     "max-image-preview": "large",
-    googlebot: {
+    googleBot: {
       index: true,
       follow: true,
     },

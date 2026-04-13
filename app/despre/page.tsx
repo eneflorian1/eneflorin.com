@@ -114,13 +114,13 @@ export default function DespreIndex() {
                             </h1>
                             <div className="animate-in animate-delay-2" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center', marginBottom: '1.5rem' }}>
                                 <span className="badge" style={{ background: 'rgba(37, 99, 235, 0.1)', color: 'var(--accent-primary)', padding: '0.4rem 0.8rem', fontSize: '0.75rem' }}>
-                                    <IconCpu size={14} style={{ marginRight: '4px' }} /> AI Training Specialist
+                                    <span style={{ marginRight: '4px', display: 'flex' }}><IconCpu size={14} /></span> AI Training Specialist
                                 </span>
                                 <span className="badge" style={{ background: 'rgba(16, 185, 129, 0.1)', color: 'var(--accent-green)', padding: '0.4rem 0.8rem', fontSize: '0.75rem' }}>
-                                    <IconNetwork size={14} style={{ marginRight: '4px' }} /> Blockchain Engineer
+                                    <span style={{ marginRight: '4px', display: 'flex' }}><IconNetwork size={14} /></span> Blockchain Engineer
                                 </span>
                                 <span className="badge" style={{ background: 'rgba(236, 72, 153, 0.1)', color: 'var(--accent-pink)', padding: '0.4rem 0.8rem', fontSize: '0.75rem' }}>
-                                    <IconGlobe size={14} style={{ marginRight: '4px' }} /> Sibiu, România
+                                    <span style={{ marginRight: '4px', display: 'flex' }}><IconGlobe size={14} /></span> Sibiu, România
                                 </span>
                             </div>
                             <p className="hero__description animate-in animate-delay-3" style={{ maxWidth: '600px', fontSize: '1.05rem', margin: '0 auto 2rem' }}>
@@ -138,7 +138,7 @@ export default function DespreIndex() {
                         {/* Skills Section */}
                         <section className="card animate-in animate-delay-4" style={{ padding: '2rem' }}>
                             <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <IconSparkles size={24} color="var(--accent-primary)" /> Expertiză Tehnică
+                                <span style={{ color: 'var(--accent-primary)', display: 'flex' }}><IconSparkles size={24} /></span> Expertiză Tehnică
                             </h2>
                             
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -174,7 +174,7 @@ export default function DespreIndex() {
                         {/* Experience Section */}
                         <section className="card animate-in animate-delay-5" style={{ padding: '2rem' }}>
                             <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <IconDocument size={24} color="var(--accent-primary)" /> Experiență Profesională
+                                <span style={{ color: 'var(--accent-primary)', display: 'flex' }}><IconDocument size={24} /></span> Experiență Profesională
                             </h2>
 
                             <div style={{ position: 'relative', paddingLeft: '1.5rem', borderLeft: '2px solid rgba(37, 99, 235, 0.1)', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -210,7 +210,7 @@ export default function DespreIndex() {
                         {/* Education Section */}
                         <section className="card animate-in animate-delay-6" style={{ padding: '2rem' }}>
                             <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <IconBook size={24} color="var(--accent-primary)" /> Educație și Formare
+                                <span style={{ color: 'var(--accent-primary)', display: 'flex' }}><IconBook size={24} /></span> Educație și Formare
                             </h2>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
