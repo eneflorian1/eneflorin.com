@@ -86,17 +86,8 @@ export default function Home() {
       <Header />
 
       <main className="page-content">
-        {/* ===== HERO VIDEO ===== */}
-        <section className="hero-video">
-          <video
-            className="hero-video__bg"
-            autoPlay
-            muted
-            loop
-            playsInline
-          >
-            <source src="/videos/bg-video.mp4" type="video/mp4" />
-          </video>
+        {/* ===== HERO SECTION ===== */}
+        <section className="hero-video" style={{ background: 'var(--gradient-hero)' }}>
           <div className="hero-video__overlay"></div>
           <div className="hero-video__content animate-in">
             <h1 className="hero-video__title">Viitorul e Aici</h1>
