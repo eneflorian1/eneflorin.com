@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import * as d3 from 'd3';
 import { IconBook, IconSparkles, IconUser } from '../icons';
 
+import contentData from '../data/content.json';
+
 export interface GraphNode extends d3.SimulationNodeDatum {
     id: string;
     label: string;
@@ -21,22 +23,15 @@ export interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
 const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
 export function NeuralNetworkBlog() {
-    const [posts, setPosts] = useState<{ id: string, title: string, content: string, domain: string, date: string }[]>([
-        {
-            id: 'post-1',
-            title: 'Conceptul de bază al AI',
-            content: 'Inteligența artificială reprezintă capacitatea unei mașini de a imita funcțiile cognitive umane, cum ar fi învățarea și rezolvarea problemelor.',
-            domain: 'Inteligență Artificială',
-            date: new Date().toISOString()
-        },
-        {
-            id: 'post-2',
-            title: 'Ce este un blockchain?',
-            content: 'Un blockchain este o bază de date distribuită care menține o listă continuă de înregistrări (blocuri) securizate prin criptografie.',
-            domain: 'Web3',
-            date: new Date().toISOString()
-        }
-    ]);
+    // Combine tutorials and books for the feed
+    const allContent = [
+        ...contentData.tutorials.map(t => ({ ...t, type: 'tutorial' })),
+        ...contentData.books.map(b => ({ ...b, type: 'book' }))
+    ].sort((a, b) => {
+        const dateA = a.date && a.date !== 'În curând' ? new Date(a.date).getTime() : 0;
+        const dateB = b.date && b.date !== 'În curând' ? new Date(b.date).getTime() : 0;
+        return dateB - dateA;
+    });
 
     const [nodes, setNodes] = useState<GraphNode[]>([]);
     const [links, setLinks] = useState<GraphLink[]>([]);
@@ -44,30 +39,34 @@ export function NeuralNetworkBlog() {
     const svgRef = useRef<SVGSVGElement>(null);
     const simulationRef = useRef<d3.Simulation<GraphNode, GraphLink> | null>(null);
 
-    // Initial graph setup based on posts
+    // Initial graph setup based on contentData
     useEffect(() => {
-        const uniqueDomains = Array.from(new Set(posts.map(p => p.domain)));
-
         const newNodes: GraphNode[] = [
             { id: 'root', label: 'Evoluție', group: 'root', val: 20, color: '#8b5cf6' }
         ];
         const newLinks: GraphLink[] = [];
 
-        // Add domain nodes
-        uniqueDomains.forEach(domain => {
-            newNodes.push({ id: `domain-${domain}`, label: domain, group: 'domain', val: 15, color: '#3b82f6' });
-            newLinks.push({ source: 'root', target: `domain-${domain}`, value: 2 });
+        // Add domain/category nodes
+        contentData.categories.forEach(cat => {
+            newNodes.push({ id: `domain-${cat.id}`, label: cat.title, group: 'domain', val: 15, color: cat.color });
+            newLinks.push({ source: 'root', target: `domain-${cat.id}`, value: 2 });
         });
 
-        // Add post nodes
-        posts.forEach(post => {
-            newNodes.push({ id: post.id, label: post.title, group: 'post', val: 10, color: '#10b981' });
-            newLinks.push({ source: `domain-${post.domain}`, target: post.id, value: 1 });
+        // Add tutorial nodes
+        contentData.tutorials.forEach(tut => {
+            newNodes.push({ id: `tut-${tut.slug}`, label: tut.title, group: 'tutorial', val: 10, color: '#10b981' });
+            newLinks.push({ source: `domain-${tut.categoryId}`, target: `tut-${tut.slug}`, value: 1 });
+        });
+
+        // Add book nodes
+        contentData.books.forEach(book => {
+            newNodes.push({ id: `book-${book.slug}`, label: book.title, group: 'book', val: 12, color: '#ec4899' });
+            newLinks.push({ source: 'root', target: `book-${book.slug}`, value: 1.5 });
         });
 
         setNodes(newNodes);
         setLinks(newLinks);
-    }, [posts]);
+    }, []);
 
     // D3 force simulation
     useEffect(() => {
@@ -206,45 +205,45 @@ export function NeuralNetworkBlog() {
                 </h2>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                    {posts.map(post => (
-                        <div key={post.id} className="animate-in" style={{
-                            background: 'rgba(255, 255, 255, 0.03)',
-                            border: '1px solid rgba(255, 255, 255, 0.05)',
-                            borderRadius: '16px',
-                            padding: '1.5rem',
-                            transition: 'transform 0.2s, background 0.2s',
-                            cursor: 'pointer'
-                        }}
-                            onMouseOver={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-4px)';
-                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    {allContent.map((item: any) => (
+                        <Link 
+                            href={item.type === 'book' ? `/books/${item.slug}` : `/tutorials/${item.slug}`}
+                            key={item.slug} 
+                            className="animate-in" 
+                            style={{
+                                display: 'block',
+                                textDecoration: 'none',
+                                background: 'rgba(255, 255, 255, 0.03)',
+                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                borderRadius: '16px',
+                                padding: '1.5rem',
+                                transition: 'transform 0.2s, background 0.2s',
+                                cursor: 'pointer'
                             }}
-                            onMouseOut={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
-                            }}>
+                        >
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                                 <span style={{
-                                    background: 'rgba(59, 130, 246, 0.1)',
-                                    color: '#60a5fa',
+                                    background: item.type === 'book' ? 'rgba(236, 72, 153, 0.1)' : 'rgba(16, 185, 129, 0.1)',
+                                    color: item.type === 'book' ? '#ec4899' : '#10b981',
                                     padding: '0.25rem 0.75rem',
                                     borderRadius: '999px',
                                     fontSize: '0.75rem',
-                                    fontWeight: '500'
+                                    fontWeight: 'bold',
+                                    textTransform: 'uppercase'
                                 }}>
-                                    {post.domain}
+                                    {item.type}
                                 </span>
                                 <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>
-                                    {new Date(post.date).toLocaleDateString()}
+                                    {item.date}
                                 </span>
                             </div>
                             <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#f3f4f6', marginBottom: '0.75rem' }}>
-                                {post.title}
+                                {item.title}
                             </h3>
                             <p style={{ color: '#9ca3af', fontSize: '0.875rem', lineHeight: '1.6' }}>
-                                {post.content}
+                                {item.description}
                             </p>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

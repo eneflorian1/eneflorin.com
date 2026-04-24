@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Header } from "./components/Header";
+import { BottomNav } from "./components/BottomNav";
 import {
   IconHome,
   IconBook,
@@ -76,11 +77,15 @@ const categories = [
 
 const stats = [
   { value: "1+", label: "Tutoriale", icon: IconBookOpen },
-  { value: "6", label: "Categorii", icon: IconBook },
-  { value: "11+", label: "Min conținut", icon: IconClock },
+  { value: "1+", label: "Cărți AI", icon: IconBook },
+  { value: "6", label: "Categorii", icon: IconGlobe },
 ];
 
+import contentData from "./data/content.json";
+
 export default function Home() {
+  const recentBooks = contentData.books.slice(0, 3);
+
   return (
     <>
       <Header />
@@ -98,6 +103,63 @@ export default function Home() {
               <span>Pachetul Roboți Umanoizi</span>
               <IconArrowRight size={18} />
             </Link>
+          </div>
+        </section>
+
+        {/* ===== STATS BAR ===== */}
+        <section className="stats-bar animate-in">
+          <div className="container">
+            <div className="stats-grid">
+              {stats.map((stat, i) => {
+                const StatIcon = stat.icon;
+                return (
+                  <div key={i} className="stat-item">
+                    <div className="stat-item__icon"><StatIcon size={24} /></div>
+                    <div className="stat-item__content">
+                      <div className="stat-item__value">{stat.value}</div>
+                      <div className="stat-item__label">{stat.label}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== RECENT BOOKS SECTION ===== */}
+        <section className="section bg-alt">
+          <div className="container">
+            <div className="section__header animate-in">
+              <h2>Cărți Recente</h2>
+              <p className="section__subtitle">Cele mai noi publicații generate de AI</p>
+            </div>
+            <div className="books-preview-grid">
+              {recentBooks.map((book: any, i: number) => (
+                <Link 
+                  href={`/books/${book.slug}`} 
+                  key={book.slug} 
+                  className="book-preview-card animate-in"
+                  style={{ animationDelay: `${0.1 * (i + 1)}s` }}
+                >
+                  <div className="book-preview-card__icon">
+                    <IconBook size={32} />
+                  </div>
+                  <div className="book-preview-card__content">
+                    <h3 className="book-preview-card__title">{book.title}</h3>
+                    <p className="book-preview-card__description">{book.description}</p>
+                    <div className="book-preview-card__footer">
+                      <span className="author">{book.author}</span>
+                      <span className="date">{book.date}</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className="section__footer animate-in">
+              <Link href="/books" className="link-arrow">
+                Vezi toată biblioteca <IconArrowRight size={14} />
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -159,6 +221,35 @@ export default function Home() {
                   <div className="price-crypto">~ 0.004 BTC</div>
                 </div>
               </div>
+
+              {/* Card 3: Books */}
+              <div className="service-card-wrapper animate-in animate-delay-3">
+                <Link href="/books" className="spotlight-card" id="spotlight-books">
+                  <div className="spotlight-card__image">
+                    <div style={{ background: 'linear-gradient(45deg, #8b5cf6, #ec4899)', height: '200px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+                      <IconBook size={64} />
+                    </div>
+                    <div className="spotlight-card__overlay">
+                      <span className="badge badge--new"><IconSparkles size={12} /> Nou</span>
+                    </div>
+                  </div>
+                  <div className="spotlight-card__body">
+                    <h3 className="spotlight-card__title">
+                      <span className="spotlight-card__icon-wrap">
+                        <IconBookOpen size={20} />
+                      </span>
+                      Cărți Generate de AI
+                    </h3>
+                    <p className="spotlight-card__description">
+                      Cunoaștere instantanee generată de agenți autonomi. Cărți de specialitate pe teme de tehnologie și viitor.
+                    </p>
+                  </div>
+                </Link>
+                <div className="service-pricing">
+                  <div className="price-main">Gratuit <span className="price-unit">/ lectură</span></div>
+                  <div className="price-crypto">Open Source</div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -201,27 +292,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Fixed Bottom Nav */}
-      <nav className="nav-bottom">
-        <div className="nav-bottom__inner">
-          <Link href="/" className="nav-bottom__item nav-bottom__item--active" id="nav-home">
-            <span className="nav-bottom__icon"><IconHome size={22} /></span>
-            <span>Acasă</span>
-          </Link>
-          <Link href="/tutorials" className="nav-bottom__item" id="nav-tutorials">
-            <span className="nav-bottom__icon"><IconBook size={22} /></span>
-            <span>Tutoriale</span>
-          </Link>
-          <Link href="/retea-neuronala" className="nav-bottom__item" id="nav-astazi">
-            <span className="nav-bottom__icon"><IconSparkles size={22} /></span>
-            <span>Astăzi</span>
-          </Link>
-          <Link href="/despre" className="nav-bottom__item" id="nav-about">
-            <span className="nav-bottom__icon"><IconUser size={22} /></span>
-            <span>Despre</span>
-          </Link>
-        </div>
-      </nav>
+      <BottomNav />
     </>
   );
 }

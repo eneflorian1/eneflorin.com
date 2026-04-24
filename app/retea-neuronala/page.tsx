@@ -9,6 +9,8 @@ import {
     IconArrowLeft,
 } from "../icons";
 
+import { BottomNav } from "../components/BottomNav";
+
 export default function ReteaNeuronala() {
     return (
         <>
@@ -37,27 +39,7 @@ export default function ReteaNeuronala() {
                 </section>
             </main>
 
-            {/* Fixed Bottom Nav */}
-            <nav className="nav-bottom">
-                <div className="nav-bottom__inner">
-                    <Link href="/" className="nav-bottom__item" id="nav-home">
-                        <span className="nav-bottom__icon"><IconHome size={22} /></span>
-                        <span>Acasă</span>
-                    </Link>
-                    <Link href="/tutorials" className="nav-bottom__item" id="nav-tutorials">
-                        <span className="nav-bottom__icon"><IconBook size={22} /></span>
-                        <span>Tutoriale</span>
-                    </Link>
-                    <Link href="/retea-neuronala" className="nav-bottom__item nav-bottom__item--active" id="nav-astazi">
-                        <span className="nav-bottom__icon"><IconSparkles size={22} /></span>
-                        <span>Astăzi</span>
-                    </Link>
-                    <Link href="/despre" className="nav-bottom__item" id="nav-about">
-                        <span className="nav-bottom__icon"><IconUser size={22} /></span>
-                        <span>Despre</span>
-                    </Link>
-                </div>
-            </nav>
+            <BottomNav />
         </>
     );
 }

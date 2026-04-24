@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Header } from "../components/Header";
+import { BottomNav } from "../components/BottomNav";
 import {
     IconHome,
     IconBook,
@@ -14,6 +15,8 @@ import {
     IconArrowRight,
     IconSparkles,
 } from "../icons";
+
+import contentData from "../data/content.json";
 
 /* ---- Category SVG Icons ---- */
 function IconUGC({ size = 24, className = "" }: { size?: number; className?: string }) {
@@ -60,122 +63,21 @@ function IconRuler({ size = 24, className = "" }: { size?: number; className?: s
     );
 }
 
-const categories = [
-    {
-        id: "ugc",
-        title: "UGC",
-        subtitle: "User Generated Content",
-        description: "Cum să creezi conținut viral și să câștigi ca și creator.",
-        icon: IconUGC,
-        color: "#ec4899",
-        bgColor: "rgba(236, 72, 153, 0.06)",
-        borderColor: "rgba(236, 72, 153, 0.12)",
-        tutorials: [
-            {
-                slug: "ugc",
-                title: "UGC - User Generated Content",
-                description: "Descoperă cum să creezi, să monetizezi și să distribui conținut generat de utilizatori.",
-                badges: ["new"],
-            },
-        ],
-        comingSoon: false,
-    },
-    {
-        id: "web4",
-        title: "Web 4.0",
-        subtitle: "Blockchain & Agenți Blockchain",
-        description: "Blockchain, contracte inteligente și agenți autonomi descentralizați.",
-        icon: IconLink,
-        color: "#2563eb",
-        bgColor: "rgba(37, 99, 235, 0.06)",
-        borderColor: "rgba(37, 99, 235, 0.12)",
-        tutorials: [
-            {
-                slug: "blockchain",
-                title: "Introducere în Blockchain",
-                description: "Ce este blockchain-ul, cum funcționează și de ce contează.",
-                badges: ["text", "audio"],
-            },
-        ],
-        comingSoon: false,
-    },
-    {
-        id: "ai-agents",
-        title: "Agenți AI",
-        subtitle: "Inteligență Artificială Aplicată",
-        description: "Construiește și folosește agenți AI în proiectele tale.",
-        icon: IconCpu,
-        color: "#06b6d4",
-        bgColor: "rgba(6, 182, 212, 0.06)",
-        borderColor: "rgba(6, 182, 212, 0.12)",
-        tutorials: [
-            {
-                slug: "agenti-ai",
-                title: "Agenți AI - Construiește Asistenți Inteligenți",
-                description: "Învață să creezi agenți AI autonomi care pot automatiza taskuri complexe.",
-                badges: ["new"],
-            },
-        ],
-        comingSoon: false,
-    },
-    {
-        id: "trading",
-        title: "Trading Crypto",
-        subtitle: "Strategii și Analiză",
-        description: "Învață analiza tehnică, strategii de trading și managementul riscului.",
-        icon: IconChart,
-        color: "#10b981",
-        bgColor: "rgba(16, 185, 129, 0.06)",
-        borderColor: "rgba(16, 185, 129, 0.12)",
-        tutorials: [
-            {
-                slug: "trading-crypto",
-                title: "Trading Crypto - Strategii & Analiză",
-                description: "Stăpânește arta tradingului de criptomonede prin strategii dovedite.",
-                badges: ["new"],
-            },
-        ],
-        comingSoon: false,
-    },
-    {
-        id: "robots",
-        title: "Roboți Umanoizi",
-        subtitle: "Robotică & Automatizare",
-        description: "Proiectarea, construirea și programarea roboților umanoizi.",
-        icon: IconRobot,
-        color: "#f59e0b",
-        bgColor: "rgba(245, 158, 11, 0.06)",
-        borderColor: "rgba(245, 158, 11, 0.12)",
-        tutorials: [
-            {
-                slug: "roboti-umanoizi",
-                title: "Roboți Umanoizi - Robotică & Automatizare",
-                description: "Explorează fascinanta lume a roboticii umanoide - de la mecanică la AI.",
-                badges: ["new"],
-            },
-        ],
-        comingSoon: false,
-    },
-    {
-        id: "cad",
-        title: "Proiectare CAD",
-        subtitle: "Design & Modelare 3D",
-        description: "De la schiță la model 3D — proiectare asistată de calculator.",
-        icon: IconRuler,
-        color: "#8b5cf6",
-        bgColor: "rgba(139, 92, 246, 0.06)",
-        borderColor: "rgba(139, 92, 246, 0.12)",
-        tutorials: [
-            {
-                slug: "proiectare-cad",
-                title: "Proiectare CAD - Design & Modelare 3D",
-                description: "Învață să creezi modele 3D profesionale pentru design industrial.",
-                badges: ["new"],
-            },
-        ],
-        comingSoon: false,
-    },
-];
+const IconMap: Record<string, any> = {
+    ugc: IconUGC,
+    chart: IconChart,
+    robot: IconRobot,
+    ruler: IconRuler,
+    link: IconLink,
+    cpu: IconCpu
+};
+
+const categories = contentData.categories.map(cat => ({
+    ...cat,
+    icon: IconMap[cat.icon] || IconLink,
+    tutorials: contentData.tutorials.filter(t => t.categoryId === cat.id)
+}));
+
 
 export default function TutorialsIndex() {
     return (
@@ -264,27 +166,7 @@ export default function TutorialsIndex() {
                 </section>
             </main>
 
-            {/* Fixed Bottom Nav */}
-            <nav className="nav-bottom">
-                <div className="nav-bottom__inner">
-                    <Link href="/" className="nav-bottom__item" id="nav-home">
-                        <span className="nav-bottom__icon"><IconHome size={22} /></span>
-                        <span>Acasă</span>
-                    </Link>
-                    <Link href="/tutorials" className="nav-bottom__item nav-bottom__item--active" id="nav-tutorials">
-                        <span className="nav-bottom__icon"><IconBook size={22} /></span>
-                        <span>Tutoriale</span>
-                    </Link>
-                    <Link href="/retea-neuronala" className="nav-bottom__item" id="nav-astazi">
-                        <span className="nav-bottom__icon"><IconSparkles size={22} /></span>
-                        <span>Astăzi</span>
-                    </Link>
-                    <Link href="/despre" className="nav-bottom__item" id="nav-about">
-                        <span className="nav-bottom__icon"><IconUser size={22} /></span>
-                        <span>Despre</span>
-                    </Link>
-                </div>
-            </nav>
+            <BottomNav />
         </>
     );
 }

@@ -11,6 +11,7 @@ export function Header() {
     const pathname = usePathname();
 
     const isHome = pathname === "/";
+    const isBooks = pathname?.startsWith("/books");
     const isTutorials = pathname?.startsWith("/tutorials");
     const isAstazi = pathname === "/retea-neuronala";
     const isDespre = pathname === "/despre";
@@ -31,6 +32,13 @@ export function Header() {
                                 id="desktop-nav-home"
                             >
                                 Acasă
+                            </Link>
+                            <Link
+                                href="/books"
+                                className={`site-header__nav-link ${isBooks ? 'site-header__nav-link--active' : ''}`}
+                                id="desktop-nav-books"
+                            >
+                                Cărți
                             </Link>
                             <Link
                                 href="/tutorials"
