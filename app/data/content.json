@@ -75,7 +75,9 @@
       "categoryId": "web4",
       "date": "9 Mar 2026",
       "duration": "8 min lectură · 3 min audio",
-      "badges": ["text", "audio", "new"]
+      "badges": ["text", "audio", "new"],
+      "content": "Blockchain-ul este un registru digital descentralizat care înregistrează tranzacțiile pe mai multe computere. <p>Siguranța este garantată prin criptografie, făcând practic imposibilă alterarea datelor odată ce au fost scrise în bloc. <p>În acest tutorial, vom explora conceptele de noduri, minare și contracte inteligente.",
+      "audioUrl": "/audio/blockchain-intro.mp3"
     },
     {
       "slug": "ugc",
