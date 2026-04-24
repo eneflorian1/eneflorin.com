@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import * as d3 from 'd3';
+import Link from 'next/link';
 import { IconBook, IconSparkles, IconUser } from '../icons';
 
 import contentData from '../data/content.json';
