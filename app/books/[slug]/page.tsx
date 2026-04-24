@@ -1,16 +1,30 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Header } from "../../components/Header";
 import { BottomNav } from "../../components/BottomNav";
-import { IconArrowLeft, IconBookOpen, IconClock } from "../../icons";
+import { IconArrowLeft, IconBookOpen, IconClock, IconHeadphones, IconDownload, IconSparkles } from "../../icons";
 import contentData from "../../data/content.json";
 
 export default function BookReader() {
     const params = useParams();
     const slug = params.slug;
+    const [scrollProgress, setScrollProgress] = useState(0);
     const book = contentData.books.find((b: any) => b.slug === slug);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const totalScroll = document.documentElement.scrollTop;
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scroll = `${(totalScroll / windowHeight) * 100}%`;
+            setScrollProgress(parseFloat(scroll));
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     if (!book) {
         return (
@@ -31,6 +45,14 @@ export default function BookReader() {
         <>
             <Header />
 
+            {/* Reading Progress */}
+            <div className="reader-progress">
+                <div 
+                    className="reader-progress-bar" 
+                    style={{ width: `${scrollProgress}%` }}
+                ></div>
+            </div>
+
             <main className="page-content">
                 <article className="reader-view">
                     <div className="container container--narrow">
@@ -42,22 +64,33 @@ export default function BookReader() {
                             <div className="reader-meta">
                                 <span><IconBookOpen size={16} /> {book.author}</span>
                                 <span><IconClock size={16} /> {book.date}</span>
+                                <span className="pill"><IconSparkles size={12} /> AI Generated</span>
                             </div>
                         </header>
 
                         <div className="reader-content animate-in animate-delay-1">
                             {book.chapters.map((chapter: any, idx: number) => (
-                                <section key={idx} className="reader-chapter">
+                                <section key={idx} className="reader-chapter" id={`chapter-${idx}`}>
                                     <h2 className="reader-chapter__title">{chapter.title}</h2>
                                     <div 
                                         className="reader-text"
-                                        dangerouslySetInnerHTML={{ __html: chapter.content.replace(/\n/g, '<br/>') }}
+                                        dangerouslySetInnerHTML={{ __html: chapter.content.replace(/\n/g, '<p>') }}
                                     />
                                 </section>
                             ))}
                         </div>
                     </div>
                 </article>
+
+                {/* Floating Action Buttons */}
+                <div className="reader-actions animate-in animate-delay-2">
+                    <button className="action-fab" title="Ascultă Audio">
+                        <IconHeadphones size={20} />
+                    </button>
+                    <button className="action-fab" title="Descarcă PDF">
+                        <IconDownload size={20} />
+                    </button>
+                </div>
             </main>
 
             <BottomNav />
