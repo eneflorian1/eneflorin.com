@@ -74,6 +74,7 @@ const IconMap: Record<string, any> = {
 
 const categories = contentData.categories.map(cat => ({
     ...cat,
+    comingSoon: 'comingSoon' in cat ? (cat as any).comingSoon : false,
     icon: IconMap[cat.icon] || IconLink,
     tutorials: contentData.tutorials.filter(t => t.categoryId === cat.id)
 }));
@@ -107,6 +108,33 @@ export default function TutorialsIndex() {
                 <section className="section">
                     <div className="container">
                         <div className="categories-grid">
+                            {/* Special Card: Books / Library */}
+                            <div className="category-card animate-in" style={{ borderColor: 'var(--accent-pink)', background: 'rgba(236, 72, 153, 0.02)' }}>
+                                <div className="category-card__header">
+                                    <div className="category-card__icon" style={{ background: 'rgba(236, 72, 153, 0.1)', color: '#ec4899' }}>
+                                        <IconBook size={24} />
+                                    </div>
+                                    <div className="category-card__info">
+                                        <h2 className="category-card__title">Librărie AI</h2>
+                                        <p className="category-card__subtitle">Cărți & Publicații</p>
+                                    </div>
+                                    <span className="badge badge--new" style={{ fontSize: "0.6rem", background: '#ec4899' }}>Sincronizat</span>
+                                </div>
+                                <p className="category-card__description">
+                                    Acces direct la toate cărțile generate autonom. Documentație extinsă și ghiduri complete sub formă de carte.
+                                </p>
+                                <div className="category-card__tutorials">
+                                    <Link href="/books" className="category-tutorial-link">
+                                        <span className="category-tutorial-link__title">Vezi toate cărțile</span>
+                                        <span className="category-tutorial-link__arrow"><IconArrowRight size={14} /></span>
+                                    </Link>
+                                    <Link href="/books" className="category-tutorial-link" style={{ marginTop: '0.5rem', opacity: 0.8, fontSize: '0.8rem' }}>
+                                        <span className="category-tutorial-link__title">Status Sincronizare: Activ</span>
+                                        <span className="category-tutorial-link__arrow"><IconSparkles size={12} /></span>
+                                    </Link>
+                                </div>
+                            </div>
+
                             {categories.map((cat, i) => {
                                 const CatIcon = cat.icon;
                                 return (
