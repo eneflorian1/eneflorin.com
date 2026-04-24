@@ -9,11 +9,7 @@ export async function POST(request: Request) {
         const data = await request.json();
         const { type, content, secret } = data;
 
-        // Basic security check
-        if (secret !== process.env.PUBLISH_SECRET && process.env.NODE_ENV === 'production') {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        }
-
+        // Authentication removed as requested by user
         if (!fs.existsSync(CONTENT_PATH)) {
             return NextResponse.json({ error: 'Content file not found' }, { status: 404 });
         }
