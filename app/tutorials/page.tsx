@@ -72,10 +72,22 @@ const IconMap: Record<string, any> = {
     cpu: IconCpu
 };
 
-const categories = contentData.categories.map(cat => ({
+interface Category {
+    id: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    icon: string;
+    color: string;
+    bgColor: string;
+    borderColor: string;
+    comingSoon?: boolean;
+}
+
+const categories = (contentData.categories as Category[]).map(cat => ({
     ...cat,
-    comingSoon: 'comingSoon' in cat ? (cat as any).comingSoon : false,
-    icon: IconMap[cat.icon] || IconLink,
+    comingSoon: cat.comingSoon || false,
+    Icon: IconMap[cat.icon] || IconLink,
     tutorials: contentData.tutorials.filter(t => t.categoryId === cat.id)
 }));
 
@@ -136,7 +148,7 @@ export default function TutorialsIndex() {
                             </div>
 
                             {categories.map((cat, i) => {
-                                const CatIcon = cat.icon;
+                                const CatIcon = cat.Icon;
                                 return (
                                     <div
                                         key={cat.id}

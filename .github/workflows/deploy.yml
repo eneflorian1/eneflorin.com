@@ -1,4 +1,4 @@
-name: Deploy to Hostico cPanel
+name: Deploy to VPS
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🎉 Deploy to VPS
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
@@ -25,15 +25,37 @@ jobs:
       - name: 🏗️ Build Project
         run: npm run build
 
-      - name: 📂 Sync files to Hostico
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: 📂 Sync files to VPS
+        uses: appleboy/scp-action@v0.1.7
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./out/
-          server-dir: ./public_html/
-          
-          # DANGER: Set 'true' to DELETE existing files (like Hostico's default index.php)
-          # ONLY use this if you don't keep other files (images/emails) in public_html
-          dangerous-clean-slate: true 
+          host: 155.117.45.192
+          username: root
+          password: ${{ secrets.VPS_PASSWORD }}
+          source: "."
+          target: "/root/eneflorin.com"
+          rm: true
+
+      - name: 🚀 Restart PM2 & Nginx
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 155.117.45.192
+          username: root
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            cd /root/eneflorin.com
+            
+            # Install production dependencies on the VPS
+            npm ci --omit=dev
+            
+            # Reload PM2 process
+            pm2 delete eneflorin.com 2>/dev/null || true
+            pm2 start npm --name "eneflorin.com" -- run start -- -p 3003
+            pm2 save
+            
+            # Nginx config should be copied from usa-app/nginx/eneflorin.com.conf
+            # Make sure to push usa-app and link the nginx config!
+            if [ -f /root/usa-app/nginx/eneflorin.com.conf ]; then
+              cp /root/usa-app/nginx/eneflorin.com.conf /etc/nginx/sites-available/eneflorin.com.conf
+              ln -sf /etc/nginx/sites-available/eneflorin.com.conf /etc/nginx/sites-enabled/
+              systemctl restart nginx
+            fi
