@@ -1,4 +1,4 @@
-﻿// iOS-style SVG icons — thin stroke, rounded caps, clean lines
+// iOS-style SVG icons — thin stroke, rounded caps, clean lines
 // Inspired by SF Symbols / Phosphor Icons
 
 interface IconProps {
@@ -337,6 +337,15 @@ export function IconLayers({ size = 24, className = "" }: IconProps) {
             <polygon points="12 2 2 7 12 12 22 7 12 2" />
             <polyline points="2 17 12 22 22 17" />
             <polyline points="2 12 12 17 22 12" />
+        </svg>
+    );
+}
+export function IconDownload({ size = 24, className = "" }: IconProps) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
         </svg>
     );
 }
