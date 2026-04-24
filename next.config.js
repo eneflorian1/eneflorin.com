@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
+  // output: 'export', // Removed for VPS SSR support
   images: {
     unoptimized: true,
   },
