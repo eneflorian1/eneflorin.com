@@ -4,8 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link';
 import { IconBook, IconSparkles, IconUser } from '../icons';
-
-import contentData from '../data/content.json';
+import type { SiteContent } from '../lib/getContent';
 
 export interface GraphNode extends d3.SimulationNodeDatum {
     id: string;
@@ -23,11 +22,11 @@ export interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
 
 const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
-export function NeuralNetworkBlog() {
+export function NeuralNetworkBlog({ content }: { content: SiteContent }) {
     // Combine tutorials and books for the feed
     const allContent = [
-        ...contentData.tutorials.map(t => ({ ...t, type: 'tutorial' })),
-        ...contentData.books.map(b => ({ ...b, type: 'book' }))
+        ...content.tutorials.map(t => ({ ...t, type: 'tutorial' as const })),
+        ...content.books.map(b => ({ ...b, type: 'book' as const }))
     ].sort((a, b) => {
         const dateA = a.date && a.date !== 'În curând' ? new Date(a.date).getTime() : 0;
         const dateB = b.date && b.date !== 'În curând' ? new Date(b.date).getTime() : 0;
@@ -48,26 +47,26 @@ export function NeuralNetworkBlog() {
         const newLinks: GraphLink[] = [];
 
         // Add domain/category nodes
-        contentData.categories.forEach(cat => {
+        content.categories.forEach(cat => {
             newNodes.push({ id: `domain-${cat.id}`, label: cat.title, group: 'domain', val: 15, color: cat.color });
             newLinks.push({ source: 'root', target: `domain-${cat.id}`, value: 2 });
         });
 
         // Add tutorial nodes
-        contentData.tutorials.forEach(tut => {
+        content.tutorials.forEach(tut => {
             newNodes.push({ id: `tut-${tut.slug}`, label: tut.title, group: 'tutorial', val: 10, color: '#10b981' });
             newLinks.push({ source: `domain-${tut.categoryId}`, target: `tut-${tut.slug}`, value: 1 });
         });
 
         // Add book nodes
-        contentData.books.forEach(book => {
+        content.books.forEach(book => {
             newNodes.push({ id: `book-${book.slug}`, label: book.title, group: 'book', val: 12, color: '#ec4899' });
             newLinks.push({ source: 'root', target: `book-${book.slug}`, value: 1.5 });
         });
 
         setNodes(newNodes);
         setLinks(newLinks);
-    }, []);
+    }, [content]);
 
     // D3 force simulation
     useEffect(() => {

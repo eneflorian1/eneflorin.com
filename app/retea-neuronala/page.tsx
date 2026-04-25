@@ -10,8 +10,12 @@ import {
 } from "../icons";
 
 import { BottomNav } from "../components/BottomNav";
+import { getContent } from "../lib/getContent";
+
+export const dynamic = "force-dynamic";
 
 export default function ReteaNeuronala() {
+    const content = getContent();
     return (
         <>
             <Header />
@@ -35,7 +39,7 @@ export default function ReteaNeuronala() {
                 </section>
 
                 <section className="container animate-in animate-delay-2">
-                    <NeuralNetworkBlog />
+                    <NeuralNetworkBlog content={content} />
                 </section>
             </main>
 
