@@ -1,61 +1,89 @@
-name: Deploy to VPS
+name: Deploy eneflorin.com to VPS
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
-  web-deploy:
-    name: 🎉 Deploy to VPS
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: 'npm'
 
-      - name: 📦 Install dependencies
-        run: npm ci
+      - name: Install & Build
+        run: |
+          npm ci
+          npm run build
 
-      - name: 🏗️ Build Project
-        run: npm run build
+      - name: Deploy via SSH/rsync
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rlgoDzvc -i --delete --exclude=.git/ --exclude=node_modules/ --exclude=.env"
+          SOURCE: "/"
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          TARGET: "/root/eneflorin.com"
 
-      - name: 📂 Sync files to VPS
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: 155.117.45.192
-          username: root
-          password: ${{ secrets.VPS_PASSWORD }}
-          source: "."
-          target: "/root/eneflorin.com"
-          rm: true
-
-      - name: 🚀 Restart PM2 & Nginx
+      - name: Post-Deploy / Install & PM2 reload
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 155.117.45.192
-          username: root
-          password: ${{ secrets.VPS_PASSWORD }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          command_timeout: 10m
           script: |
+            set -e
+
+            echo "===== Installing prod deps ====="
             cd /root/eneflorin.com
-            
-            # Install production dependencies on the VPS
             npm ci --omit=dev
-            
-            # Reload PM2 process
-            pm2 delete eneflorin.com 2>/dev/null || true
-            pm2 start npm --name "eneflorin.com" -- run start -- -p 3003
-            pm2 save
-            
-            # Nginx config should be copied from usa-app/nginx/eneflorin.com.conf
-            # Make sure to push usa-app and link the nginx config!
-            if [ -f /root/usa-app/nginx/eneflorin.com.conf ]; then
-              cp /root/usa-app/nginx/eneflorin.com.conf /etc/nginx/sites-available/eneflorin.com.conf
-              ln -sf /etc/nginx/sites-available/eneflorin.com.conf /etc/nginx/sites-enabled/
-              systemctl restart nginx
+
+            echo "===== Reconciling eneflorin.com PM2 process from usa-app ecosystem ====="
+            EXPECTED=$(node -e "let c=require('/root/usa-app/ecosystem.config.js').apps.find(a=>a.name==='eneflorin.com');console.log((c?c.cwd:'')+'|'+(c?c.script:''))")
+            CURRENT=$(pm2 jlist | node -e "let d=JSON.parse(require('fs').readFileSync(0));let a=d.find(x=>x.name==='eneflorin.com');if(!a){console.log('MISSING|MISSING')}else{console.log((a.pm2_env.pm_cwd||'')+'|'+(a.pm2_env.pm_exec_path||''))}")
+            echo "eneflorin.com expected: $EXPECTED"
+            echo "eneflorin.com current:  $CURRENT"
+            EXPECTED_CWD=$(echo "$EXPECTED" | cut -d'|' -f1)
+            EXPECTED_SCRIPT=$(echo "$EXPECTED" | cut -d'|' -f2)
+            CURRENT_CWD=$(echo "$CURRENT" | cut -d'|' -f1)
+            CURRENT_EXEC=$(echo "$CURRENT" | cut -d'|' -f2)
+            # Match if cwd matches AND exec ends with the expected script (e.g. node_modules/.bin/next)
+            if [ "$CURRENT_CWD" = "$EXPECTED_CWD" ] && [[ "$CURRENT_EXEC" == *"$EXPECTED_SCRIPT" ]]; then
+              echo "  → in sync, restart"
+              pm2 restart eneflorin.com --update-env
+            else
+              echo "  → stale/missing/wrong script, recreate"
+              pm2 delete eneflorin.com 2>/dev/null || true
+              pm2 start /root/usa-app/ecosystem.config.js --only eneflorin.com
             fi
+            pm2 save
+
+            echo "===== Waiting 10s to detect crash loop ====="
+            sleep 10
+            pm2 logs eneflorin.com --lines 40 --nostream --raw || true
+
+            echo "===== HEALTH CHECK ====="
+            HEALTH=$(pm2 jlist | node -e "
+              let d=JSON.parse(require('fs').readFileSync(0));
+              let a=d.find(x=>x.name==='eneflorin.com');
+              if(!a){console.log('NOT_FOUND|0|0');process.exit(0)}
+              let uptimeMs=Date.now()-a.pm2_env.pm_uptime;
+              console.log(a.pm2_env.status+'|'+uptimeMs+'|'+a.pm2_env.restart_time)
+            ")
+            STATUS=$(echo "$HEALTH" | cut -d'|' -f1)
+            UPTIME_MS=$(echo "$HEALTH" | cut -d'|' -f2)
+            RESTARTS=$(echo "$HEALTH" | cut -d'|' -f3)
+            echo "eneflorin.com: status=$STATUS uptime=${UPTIME_MS}ms restarts=$RESTARTS"
+            if [ "$STATUS" != "online" ] || [ "$UPTIME_MS" -lt 8000 ]; then
+              echo "  ERROR: eneflorin.com unhealthy - likely crash-looping"
+              exit 1
+            fi
+            echo "✓ eneflorin.com healthy"
