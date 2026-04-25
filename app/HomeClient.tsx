@@ -27,7 +27,7 @@ const categories = [
   { id: "cad", title: "CAD", icon: IconRuler, color: "#8b5cf6", bgColor: "rgba(139,92,246,0.08)" },
 ];
 
-export default function HomeClient({ recentBooks, totalBooks, totalTutorials }: { recentBooks: Book[]; totalBooks: number; totalTutorials: number }) {
+export default function HomeClient({ totalBooks, totalTutorials }: { totalBooks: number; totalTutorials: number }) {
   const stats = [
     { value: `${totalTutorials}+`, label: "Tutoriale", icon: IconBookOpen },
     { value: `${totalBooks}+`, label: "Cărți AI", icon: IconBook },
@@ -71,42 +71,6 @@ export default function HomeClient({ recentBooks, totalBooks, totalTutorials }: 
         </div>
       </section>
 
-      {/* ===== RECENT BOOKS SECTION ===== */}
-      <section className="section bg-alt">
-        <div className="container">
-          <div className="section__header animate-in">
-            <h2>Cărți Recente</h2>
-            <p className="section__subtitle">Cele mai noi publicații generate de AI</p>
-          </div>
-          <div className="books-preview-grid">
-            {recentBooks.map((book, i) => (
-              <Link
-                href={`/books/${book.slug}`}
-                key={book.slug}
-                className="book-preview-card animate-in"
-                style={{ animationDelay: `${0.1 * (i + 1)}s` }}
-              >
-                <div className="book-preview-card__icon">
-                  <IconBook size={32} />
-                </div>
-                <div className="book-preview-card__content">
-                  <h3 className="book-preview-card__title">{book.title}</h3>
-                  <p className="book-preview-card__description">{book.description}</p>
-                  <div className="book-preview-card__footer">
-                    <span className="author">{book.author}</span>
-                    <span className="date">{book.date}</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="section__footer animate-in">
-            <Link href="/books" className="link-arrow">
-              Vezi toată biblioteca <IconArrowRight size={14} />
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* ===== SERVICE CARDS ONLY ===== */}
       <section className="services-home">
