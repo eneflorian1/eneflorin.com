@@ -1,10 +1,16 @@
+<<<<<<< HEAD
    FIXED HEADER
+=======
+/* ===========================
+    FIXED HEADER
+>>>>>>> 8c7a312 (fix: update responsive design and structure)
    =========================== */
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+<<<<<<< HEAD
   height: var(--header-height);
   background: var(--bg-header);
   backdrop-filter: blur(24px) saturate(180%);
@@ -15,12 +21,34 @@
   align-items: center;
   justify-content: center;
   box-shadow: var(--shadow-header);
+=======
+  height: 60px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .site-header {
+    height: 80px;
+  }
+>>>>>>> 8c7a312 (fix: update responsive design and structure)
 }
 
 .site-header__inner {
   width: 100%;
+<<<<<<< HEAD
   max-width: 840px;
   padding: 0 1.25rem;
+=======
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding, 1rem);
+>>>>>>> 8c7a312 (fix: update responsive design and structure)
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,6 +56,7 @@
 
 .site-header__logo {
   font-weight: 800;
+<<<<<<< HEAD
   font-size: 1.1rem;
   color: var(--text-primary);
   text-decoration: none;
@@ -342,3 +371,31 @@
   border: 1px solid rgba(236, 72, 153, 0.12);
 }
 
+=======
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.site-header__nav {
+  display: none; /* Ascuns pe mobil implicit, poate fi activat cu un meniu burger */
+}
+
+@media (min-width: 768px) {
+  .site-header__nav {
+    display: flex;
+    gap: 2rem;
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #4a4a4a;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #000;
+}
+>>>>>>> 8c7a312 (fix: update responsive design and structure)

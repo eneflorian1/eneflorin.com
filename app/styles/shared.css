@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* --- Shared Card Styles --- */
 .card,
 .category-card,
@@ -289,7 +290,70 @@
     transform: translateX(-50%) scale(1);
   }
 
+=======
+:root {
+  --container-padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-padding: 2rem;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.section-padding {
+  padding: 3rem 0;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 5rem 0;
+  }
+}
+
+/* Utilitare pentru imagini responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(1);
+  }
+>>>>>>> 8c7a312 (fix: update responsive design and structure)
   50% {
     opacity: 1;
     transform: translateX(-50%) scale(1.05);
   }
+<<<<<<< HEAD
+=======
+}
+>>>>>>> 8c7a312 (fix: update responsive design and structure)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
    PREMIUM READER UI
    =========================== */
 .reader-view {
@@ -152,3 +153,49 @@
     max-width: 760px;
   }
 }
+=======
+/* ===========================
+    PREMIUM READER UI
+   =========================== */
+.reader-container {
+  max-width: 800px;
+  margin: 80px auto 40px;
+  padding: 0 1.25rem;
+}
+
+.reader-title {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+}
+
+@media (min-width: 768px) {
+  .reader-title {
+    font-size: 3rem;
+  }
+}
+
+.reader-content {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+@media (min-width: 768px) {
+  .reader-content {
+    font-size: 1.25rem;
+  }
+}
+
+.reader-content p {
+  margin-bottom: 1.5rem;
+}
+
+/* Stiluri pentru imagini în interiorul cărții */
+.reader-content img {
+  border-radius: 8px;
+  margin: 2rem 0;
+  width: 100%;
+}
+>>>>>>> 8c7a312 (fix: update responsive design and structure)
