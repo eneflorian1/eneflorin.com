@@ -73,7 +73,7 @@ export default function HomeClient({ recentBooks, totalBooks, totalTutorials }: 
   const stats = [
     { value: `${totalTutorials}+`, label: "Tutoriale", icon: IconBookOpen },
     { value: `${totalBooks}+`, label: "Cărți AI", icon: IconBook },
-    { value: "6", label: "Categorii", icon: IconGlobe },
+    { value: `${categories.length}`, label: "Categorii", icon: IconGlobe },
   ];
 
   return (
@@ -97,17 +97,17 @@ export default function HomeClient({ recentBooks, totalBooks, totalTutorials }: 
         </section>
 
         {/* ===== STATS BAR ===== */}
-        <section className="stats-bar animate-in">
+        <section className="stats-section animate-in">
           <div className="container">
             <div className="stats-grid">
               {stats.map((stat, i) => {
                 const StatIcon = stat.icon;
                 return (
-                  <div key={i} className="stat-item">
-                    <div className="stat-item__icon"><StatIcon size={24} /></div>
-                    <div className="stat-item__content">
-                      <div className="stat-item__value">{stat.value}</div>
-                      <div className="stat-item__label">{stat.label}</div>
+                  <div key={i} className="stats-card">
+                    <div className="stats-card__icon"><StatIcon size={24} /></div>
+                    <div className="stats-card__info">
+                      <div className="stats-card__value">{stat.value}</div>
+                      <div className="stats-card__label">{stat.label}</div>
                     </div>
                   </div>
                 );
