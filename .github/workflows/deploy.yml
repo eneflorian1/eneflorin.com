@@ -15,7 +15,7 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rlgoDzvc -i --delete --exclude=.git/ --exclude=node_modules/ --exclude=.next/ --exclude=.env"
+          ARGS: "-rlgoDzvc -i --delete --exclude=.git/ --exclude=node_modules/ --exclude=.next/ --exclude=.env --exclude=app/data/content.json"
           SOURCE: "/"
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
