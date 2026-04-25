@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { Header } from "../components/Header";
+import { PageWrapper } from "../components/PageWrapper";
 import {
-    IconHome,
     IconBook,
     IconUser,
     IconSparkles,
@@ -9,7 +8,6 @@ import {
     IconCpu,
     IconGlobe,
 } from "../icons";
-import { BottomNav } from "../components/BottomNav";
 
 function IconNetwork({ size = 24, className = "" }: { size?: number, className?: string }) {
     return (
@@ -90,7 +88,7 @@ export default function DespreIndex() {
     };
 
     return (
-        <>
+        <PageWrapper className="page-content" withHeader={true} withBottomNav={true}>
             {/* Inject JSON-LD Schema directly in the page for AI/Crawlers */}
             <script
                 type="application/ld+json"
@@ -101,9 +99,7 @@ export default function DespreIndex() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
 
-            <Header />
-
-            <main className="page-content" style={{ paddingBottom: '100px' }}>
+            <div style={{ paddingBottom: '60px' }}>
                 {/* Hero Section */}
                 <section className="hero">
                     <div className="container">
@@ -235,9 +231,7 @@ export default function DespreIndex() {
                         </section>
                     </div>
                 </div>
-            </main>
-
-            <BottomNav />
-        </>
+            </div>
+        </PageWrapper>
     );
 }

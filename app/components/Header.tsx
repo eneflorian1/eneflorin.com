@@ -5,16 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconBookOpen, IconSearch } from "../icons";
 import { SearchModal } from "./SearchModal";
+import { NAV_ITEMS, isItemActive } from "../lib/navigation";
 
 export function Header() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const pathname = usePathname();
-
-    const isHome = pathname === "/";
-    const isBooks = pathname?.startsWith("/books");
-    const isTutorials = pathname?.startsWith("/tutorials");
-    const isAstazi = pathname === "/retea-neuronala";
-    const isDespre = pathname === "/despre";
 
     return (
         <>
@@ -26,41 +21,16 @@ export function Header() {
 
                     <div className="site-header__right">
                         <nav className="site-header__nav">
-                            <Link
-                                href="/"
-                                className={`site-header__nav-link ${isHome ? 'site-header__nav-link--active' : ''}`}
-                                id="desktop-nav-home"
-                            >
-                                Acasă
-                            </Link>
-                            <Link
-                                href="/books"
-                                className={`site-header__nav-link ${isBooks ? 'site-header__nav-link--active' : ''}`}
-                                id="desktop-nav-books"
-                            >
-                                Cărți
-                            </Link>
-                            <Link
-                                href="/tutorials"
-                                className={`site-header__nav-link ${isTutorials ? 'site-header__nav-link--active' : ''}`}
-                                id="desktop-nav-tutorials"
-                            >
-                                Tutoriale
-                            </Link>
-                            <Link
-                                href="/retea-neuronala"
-                                className={`site-header__nav-link ${isAstazi ? 'site-header__nav-link--active' : ''}`}
-                                id="desktop-nav-astazi"
-                            >
-                                Astăzi
-                            </Link>
-                            <Link
-                                href="/despre"
-                                className={`site-header__nav-link ${isDespre ? 'site-header__nav-link--active' : ''}`}
-                                id="desktop-nav-about"
-                            >
-                                Despre
-                            </Link>
+                            {NAV_ITEMS.map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className={`site-header__nav-link ${isItemActive(item.href, pathname) ? 'site-header__nav-link--active' : ''}`}
+                                    id={`desktop-nav-${item.id}`}
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
                         </nav>
 
                         <button

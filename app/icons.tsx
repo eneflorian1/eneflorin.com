@@ -349,3 +349,47 @@ export function IconDownload({ size = 24, className = "" }: IconProps) {
         </svg>
     );
 }
+
+export function IconUGC({ size = 24, className = "" }: IconProps) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+            <path d="M15 10l4.553-2.276A1 1 0 0021 6.882V17.118a1 1 0 01-1.447.894L15 16v-6z" />
+            <rect x="3" y="6" width="12" height="12" rx="2" ry="2" />
+        </svg>
+    );
+}
+
+export function IconChart({ size = 24, className = "" }: IconProps) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+            <line x1="18" y1="20" x2="18" y2="10" />
+            <line x1="12" y1="20" x2="12" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="14" />
+            <line x1="2" y1="20" x2="22" y2="20" />
+        </svg>
+    );
+}
+
+export function IconRobot({ size = 24, className = "" }: IconProps) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+            <rect x="5" y="8" width="14" height="12" rx="2" />
+            <circle cx="9" cy="14" r="1.5" fill="currentColor" stroke="none" />
+            <circle cx="15" cy="14" r="1.5" fill="currentColor" stroke="none" />
+            <line x1="12" y1="5" x2="12" y2="8" />
+            <circle cx="12" cy="4" r="1" />
+            <line x1="3" y1="13" x2="5" y2="13" />
+            <line x1="19" y1="13" x2="21" y2="13" />
+        </svg>
+    );
+}
+
+export function IconRuler({ size = 24, className = "" }: IconProps) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+            <line x1="12" y1="22.08" x2="12" y2="12" />
+        </svg>
+    );
+}
