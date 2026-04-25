@@ -1,0 +1,172 @@
+/* --- Animations --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-in {
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.animate-delay-2 {
+  animation-delay: 0.16s;
+}
+
+.animate-delay-3 {
+  animation-delay: 0.24s;
+}
+
+.animate-delay-4 {
+  animation-delay: 0.32s;
+}
+
+/* Stagger children animation */
+.tutorial-list>* {
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tutorial-list>*:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.tutorial-list>*:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.tutorial-list>*:nth-child(3) {
+  animation-delay: 0.26s;
+}
+
+.tutorial-list>*:nth-child(4) {
+  animation-delay: 0.34s;
+}
+
+.tutorial-list>*:nth-child(5) {
+  animation-delay: 0.42s;
+}
+
+/* ===========================
+   DESKTOP (≥768px)
+   =========================== */
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+    padding: 0 2rem;
+  }
+
+  .hero {
+    padding: 3.5rem 0 2rem;
+  }
+
+  .hero__title {
+    font-size: 3rem;
+  }
+
+  .hero__description {
+    max-width: 520px;
+    font-size: 1.1rem;
+  }
+
+  .tutorial-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .section {
+    padding: 2.5rem 0;
+  }
+
+  /* Show desktop nav in header */
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .site-header__nav-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+  }
+
+  .site-header__nav-link:hover {
+    color: var(--accent-primary);
+    background: rgba(37, 99, 235, 0.05);
+    transform: translateY(-1px);
+  }
+
+  .site-header__nav-link:active {
+    transform: scale(0.96);
+    transition: all 0.1s ease;
+  }
+
+  .site-header__nav-link--active {
+    color: var(--accent-primary);
+    background: rgba(37, 99, 235, 0.06);
+  }
+
+  /* Hide mobile bottom nav */
+  .nav-bottom {
+    display: none;
+  }
+
+  .page-content {
+    padding-bottom: 3rem;
+  }
+}
+
+/* ===========================
+   LARGE DESKTOP (≥1024px)
+   =========================== */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 840px;
+  }
+
+  .site-header__inner {
+    max-width: 840px;
+  }
+
+  .hero__title {
+    font-size: 3.5rem;
+  }
+}
+

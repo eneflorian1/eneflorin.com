@@ -1,0 +1,148 @@
+/* --- Base Component Classes --- */
+.base-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-smooth);
+}
+
+.base-card--interactive {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.base-card--interactive:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(37, 99, 235, 0.12);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.base-card--interactive:active {
+  transform: scale(0.98) translateY(0);
+  transition: all 0.1s ease;
+}
+
+.base-btn,
+.btn,
+.quiz__btn,
+.course-pricing__buy-btn,
+.hero-video__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-smooth);
+  -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.base-btn:active,
+.btn:active,
+.quiz__btn:active,
+.course-pricing__buy-btn:active,
+.hero-video__btn:active {
+  transform: scale(0.98);
+  transition: all 0.1s ease;
+}
+
+
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-secondary);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Typography --- */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 900;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+}
+
+h4 {
+  font-size: 1.1rem;
+}
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* --- Layout --- */
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* --- Page Content with padding for fixed header/nav --- */
+.page-content {
+  padding-top: var(--header-height);
+  padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom) + 20px);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ===========================

@@ -1,5 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
+import "./styles/variables.css";
+import "./styles/base.css";
+import "./styles/header.css";
+import "./styles/shared.css";
+import "./styles/home.css";
+import "./styles/courses.css";
+import "./styles/animations.css";
+import "./styles/tutorials.css";
+import "./styles/components.css";
+import "./styles/reader.css";
+
 
 export const metadata: Metadata = {
   title: "Ene Florin — Tutoriale Tech",
